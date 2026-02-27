@@ -1,6 +1,40 @@
 .its {
   display: flex;
+  align-items: flex-end;
 }
+
+.its__value {
+
+}
+
+.its__val_txt {
+
+}
+
+.its__color_class {
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  background-color: #ccc; /* Цвет по умолчанию */
+}
+
+.its__descr {
+  text-align: center;
+}
+
+/* Цветовые классы для диапазонов */
+.its_green {
+  background-color: #4CAF50;
+}
+
+.its_yellow {
+  background-color: #FFC107;
+}
+
+.its_red {
+  background-color: #F44336;
+}
+
 @media (max-width: 991px) {
   
 }
