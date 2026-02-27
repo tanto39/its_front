@@ -1,0 +1,27 @@
+.inputUI {
+  display: flex;
+  flex-direction: column;
+}
+.inputUI__field, .inputUI__textarea {
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  white-space: nowrap;
+  padding: 15px 32px;
+  margin: 5px 0 16px 0;
+  font: 300 24px / 26px Roboto, Montserrat, Helvetica, sans-serif;
+}
+.inputUI__textarea {
+  min-height: 200px;
+}
+.inputUI__date {
+  width: 300px;
+}
+.inputUI__label {
+  font: 300 24px / 26px Roboto, Montserrat, Helvetica, sans-serif;
+}
+@media (max-width: 991px) {
+  .inputField {
+    padding: 16px 20px;
+  }
+}

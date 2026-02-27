@@ -3,8 +3,8 @@ import { ApiResponse, AuthResponse } from '../types/api.ts';
 import { LoginFormData } from '../types/forms.ts';
 
 export const authApi = {
-  login: async (data: LoginFormData): Promise<ApiResponse<AuthResponse>> => {
-    return apiClient.post<ApiResponse<AuthResponse>>('/auth/login', data);
+  login: async (data: LoginFormData): Promise<AuthResponse> => {
+    return apiClient.post<AuthResponse>('/auth/login', data);
   },
 
   logout: (): void => {

@@ -1,0 +1,15 @@
+.formWrap {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.form {
+  flex-grow: 0.7;
+}
+.saveButton {
+  width: 200px;
+}
+.rightSide {
+  flex-grow: 0.2;
+}

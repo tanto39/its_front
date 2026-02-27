@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { authApi } from '../../api/auth.ts';
-import { AuthState, User } from '../../types/index.ts';
+import { AuthState, IUser } from '../../types/index.ts';
 import { LoginFormData } from '../../types/forms.ts';
 
 // Получаем начальное состояние из localStorage
@@ -23,20 +23,20 @@ export const sendAuth = createAsyncThunk(
   async (formData: LoginFormData, { rejectWithValue }) => {
     try {
       const response = await authApi.login(formData);
-      if (response.success && response.data) {
-        const user: User = { ...response.data.user };
+      if (response.user.login) {
+        const user: IUser = { ...response.user };
         // Сохраняем пользователя в localStorage
         localStorage.setItem('user', JSON.stringify(user));
         // Сохраняем токен, если он есть
-        if (response.data.token) {
-          localStorage.setItem('token', response.data.token);
+        if (response.token) {
+          localStorage.setItem('token', response.token);
         }
         return { 
           user, 
-          token: response.data.token || null 
+          token: response.token || null 
         };
       } else {
-        return rejectWithValue(response.error || 'Ошибка авторизации');
+        return rejectWithValue('Ошибка авторизации');
       }
     } catch (error: any) {
       return rejectWithValue(error.message || 'Ошибка сети');

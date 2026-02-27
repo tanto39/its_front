@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { SelectOption } from "./forms.ts";
 
 // Базовые типы данных
-export interface User {
+export interface IUser {
   login: string;
   second_name: string;
   first_name: string;
@@ -12,26 +12,44 @@ export interface User {
 
 export type UserRole = "user" | "admin";
 
+export interface ICar {
+  car_id: number,
+  name: string,
+  reg_number: string,
+  date_tech: string,
+  date_repair: string,
+  milage: number,
+  its: number,
+  info: string,
+  image_url?: string,
+  person?: IUser
+}
+
 // Типы для состояния Redux
 export interface AuthState {
-  user: User | null;
+  user: IUser | null;
   token: string | null;
   isLoading: boolean;
   error: string | null;
 }
 
 export interface UsersState {
-  users: User[];
-  currentUser: User | null;
+  users: IUser[];
+  optionsUsers: SelectOption[];
+  user: IUser | null;
   isLoading: boolean;
   error: string | null;
+  successSend: boolean;
 }
 
-export interface PatientsState {
-  //cars: Car[];
+export interface CarsState {
+  cars: ICar[];
+  car: ICar;
   optionsCars: SelectOption[];
   isLoading: boolean;
+  isGetCars: boolean;
   error: string | null;
+  successSend: boolean;
 }
 
 export interface IMessage {

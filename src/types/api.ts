@@ -1,4 +1,4 @@
-import {UserRole} from './index';
+import {IUser, UserRole} from './index';
 
 // Типы для ответов API
 export interface ApiResponse<T = any> {
@@ -10,13 +10,7 @@ export interface ApiResponse<T = any> {
 }
 
 export interface AuthResponse {
-  user: {
-    login: string;
-    second_name: string;
-    first_name: string;
-    middle_name?: string;
-    role_name: UserRole;
-  };
+  user: IUser;
   token?: string;
 }
 

@@ -8,7 +8,8 @@ export interface IInputField {
   placeholder?: string;
   customClassName?: string;
   disabled?: boolean;
-  roles?: UserRole[];
+  required?: boolean;
+  is_textarea?: boolean;
 }
 
 export interface SelectOption {
@@ -22,5 +23,13 @@ export interface LoginFormData {
 }
 
 export interface carFormData {
-  name: string;
+  car_id: number,
+  name: string,
+  reg_number: string,
+  date_tech: string,
+  date_repair: string,
+  milage: number,
+  its: number,
+  info: string,
+  person_login: string,
 }

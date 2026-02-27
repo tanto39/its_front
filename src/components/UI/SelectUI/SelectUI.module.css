@@ -1,0 +1,130 @@
+.selectWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font: 300 24px / 26px Roboto, Montserrat, Helvetica, sans-serif;
+}
+
+.container {
+  position: relative;
+  user-select: none;
+  margin: 5px 0 16px 0;
+}
+
+.selectHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 32px;
+  background-color: white;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+}
+
+.selectedValue {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
+.selectedValue.placeholder {
+  color: #999;
+  line-height: 1.1;
+}
+
+.dropdownArrow {
+  background: url("/public/images/arrow.svg") no-repeat center center;
+  transition: transform 0.2s;
+  height: 8px;
+  width: 15px;
+}
+
+.selectHeader.open .dropdownArrow {
+  transform: rotate(180deg);
+}
+
+.dropdownContainer {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.searchContainer {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.optionsList {
+  max-height: 250px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.optionItem {
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #333;
+}
+
+.optionItem:hover {
+  background-color: #f5f5f5;
+}
+
+.optionItem.selected {
+  background-color: #e6f2ff;
+  color: #0066cc;
+  font-weight: 500;
+}
+
+.optionItem.highlighted {
+  background-color: #e6f2ff;
+}
+
+.noOptions {
+  padding: 20px 12px;
+  text-align: center;
+  color: #999;
+  font-style: italic;
+}
+
+.dropdownInfo {
+  padding: 8px 12px;
+  border-top: 1px solid #eee;
+  font-size: 12px;
+  color: #666;
+  background-color: #f9f9f9;
+}
+
+.disabled .selectHeader {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  color: #999;
+}
+
+.disabled .selectHeader:hover {
+  border-color: #ddd;
+}
