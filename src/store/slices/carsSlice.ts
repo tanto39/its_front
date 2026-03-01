@@ -147,7 +147,7 @@ const CarsSlice = createSlice({
           value: state.car.car_id,
           label: state.car.name,
         });
-        
+
         state.successSend = true;
       })
       .addCase(createCar.rejected, (state, action) => {
@@ -164,12 +164,12 @@ const CarsSlice = createSlice({
         state.isLoading = false;
         state.car = action.payload;
         // Обновляем в списке
-        const index = state.cars.findIndex((p) => p.car_id === action.payload.car_id);
-        state.cars[index] = action.payload;
-
-        const indexOp = state.optionsCars.findIndex((p) => p.value === action.payload.car_id);
-        state.optionsCars[indexOp].label = action.payload.name;
-          
+        if (state.cars.length > 0) {
+          const index = state.cars.findIndex((p) => p.car_id === action.payload.car_id);
+          state.cars[index] = action.payload;
+          const indexOp = state.optionsCars.findIndex((p) => p.value === action.payload.car_id);
+          state.optionsCars[indexOp].label = action.payload.name;
+        }
         state.successSend = true;
       })
       .addCase(updateCar.rejected, (state, action) => {
@@ -185,10 +185,13 @@ const CarsSlice = createSlice({
       .addCase(deleteCar.fulfilled, (state, action) => {
         state.isLoading = false;
         // Обновляем в списке
-        const index = state.cars.findIndex((p) => p.car_id === action.payload.car_id);
-        state.cars.splice(index, 1)
-        const indexOp = state.optionsCars.findIndex((p) => p.value === action.payload.car_id);
-        state.optionsCars.splice(indexOp, 1);
+        if (state.cars.length > 0) {
+          const index = state.cars.findIndex((p) => p.car_id === action.payload.car_id);
+          state.cars.splice(index, 1);
+          const indexOp = state.optionsCars.findIndex((p) => p.value === action.payload.car_id);
+          state.optionsCars.splice(indexOp, 1);
+        }
+
         state.successSend = true;
       })
       .addCase(deleteCar.rejected, (state, action) => {

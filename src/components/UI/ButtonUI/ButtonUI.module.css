@@ -12,7 +12,12 @@
 }
 .btnUI:hover {
   background-color: var(--bg-gray);
+  color: #fff;
 }
 .btn49 {
   width: 49%;
+}
+.btnConfirm {
+  background-color: var(--block-color);
+  color: var(--blue-color);
 }

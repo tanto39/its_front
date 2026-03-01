@@ -10,6 +10,15 @@
 .saveButton {
   width: 200px;
 }
+.techRequestButton {
+  width: 300px;
+}
 .rightSide {
   flex-grow: 0.2;
+}
+.buttonsBottom {
+  margin: 20px 0;
+  margin: 40px 0 0 0;
+  display: flex;
+  gap: 20px;
 }

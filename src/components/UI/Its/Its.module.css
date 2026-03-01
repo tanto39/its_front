@@ -1,40 +1,50 @@
-.its {
+.its{
+  margin-top: 10px;
+}
+.its__box {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 10px 0;
+}
+.its__label {
+  display: block;
+  font:
+    300 22px / 26px Roboto,
+    Montserrat,
+    Helvetica,
+    sans-serif;
 }
 
-.its__value {
-
+.its__valTxt {
+  font-size: 57px;
+  line-height: 1;
 }
-
-.its__val_txt {
-
+.its__mark {
+  display: flex;
+  align-items: center;
+  height: 57px;
+  gap: 16px;
 }
-
-.its__color_class {
-  width: 40px;
-  height: 40px;
+.its__color {
+  width: 57px;
+  height: 100%;
   border-radius: 2px;
-  background-color: #ccc; /* Цвет по умолчанию */
-}
-
-.its__descr {
-  text-align: center;
+  background-color: #ccc;
 }
 
 /* Цветовые классы для диапазонов */
-.its_green {
-  background-color: #4CAF50;
+.its__color_green {
+  background-color: #4caf50;
 }
 
-.its_yellow {
-  background-color: #FFC107;
+.its__color_yellow {
+  background-color: #ffc107;
 }
 
-.its_red {
-  background-color: #F44336;
+.its__color_red {
+  background-color: #f44336;
 }
 
 @media (max-width: 991px) {
-  
 }

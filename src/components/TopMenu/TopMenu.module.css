@@ -18,6 +18,7 @@
   padding: 30px 50px;
   line-height: 1;
   transition: all 0.3s;
+  font-size: 24px;
 }
 .menuItem:hover {
   background: var(--bg-gray);

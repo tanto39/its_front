@@ -9,7 +9,7 @@
   white-space: nowrap;
   padding: 15px 32px;
   margin: 5px 0 16px 0;
-  font: 300 24px / 26px Roboto, Montserrat, Helvetica, sans-serif;
+  font: 300 22px / 26px Roboto, Montserrat, Helvetica, sans-serif;
 }
 .inputUI__textarea {
   min-height: 200px;
@@ -18,7 +18,10 @@
   width: 300px;
 }
 .inputUI__label {
-  font: 300 24px / 26px Roboto, Montserrat, Helvetica, sans-serif;
+  font: 300 22px / 26px Roboto, Montserrat, Helvetica, sans-serif;
+}
+.short {
+  width: 80px;
 }
 @media (max-width: 991px) {
   .inputField {

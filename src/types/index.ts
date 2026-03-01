@@ -56,6 +56,7 @@ export interface IMessage {
   type: string;
   title: string;
   message: ReactNode | string;
+  onConfirm?: () => void;
 }
 
 export interface IMessageSlice {

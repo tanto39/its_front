@@ -21,6 +21,8 @@ const InputUI: React.FC<IInputProps> = ({ field, register, ...props }) => {
       "aria-label": field.placeholder,
       required: field.required,
       disabled: field.disabled,
+      max:field.max,
+      min:field.min,
     };
   }, [field]);
 

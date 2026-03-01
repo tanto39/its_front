@@ -10,6 +10,8 @@ export interface IInputField {
   disabled?: boolean;
   required?: boolean;
   is_textarea?: boolean;
+  max?: number;
+  min?: number;
 }
 
 export interface SelectOption {

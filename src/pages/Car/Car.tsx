@@ -8,7 +8,7 @@ import InputUI from "../../components/UI/InputUI/InputUI";
 import Loader from "../../components/UI/Loader/Loader";
 import { useAppDispatch, useAppSelector } from "../../store/helpers";
 import { setMessage } from "../../store/slices/message";
-import { clearSend, fetchCar, updateCar } from "../../store/slices/carsSlice";
+import { clearSend, fetchCar, updateCar, deleteCar } from "../../store/slices/carsSlice";
 import { carFormData } from "../../types/forms";
 import { ICar, IMessage, IUrlParam, IUser } from "../../types/index";
 import { inputFields } from "./inputFields";
@@ -80,6 +80,21 @@ const Car: React.FC = () => {
     dispatch(updateCar({ id: car?.car_id as number, data: carData }));
   };
 
+  const handleDelete = () => {
+    if (car?.car_id) {
+      const confirmMessage: IMessage = {
+        type: "C",
+        title: "Подтверждение удаления",
+        message: <p>Вы уверены, что хотите удалить этот автомобиль?</p>,
+        onConfirm: () => {
+          dispatch(deleteCar({ id: car.car_id }));
+          navigate('/cars');
+        }
+      };
+      dispatch(setMessage(confirmMessage));
+    }
+  };
+
   return (
     <main className={styles.carPageWrap}>
       {isLoading && <Loader />}
@@ -104,12 +119,24 @@ const Car: React.FC = () => {
                 label="Ответственное лицо"
               />
 
-              <Its its_val={car.its} register={register}/>
+              <Its its_val={car.its} />
 
-              <div className={styles.saveButton}>
+              <div className={styles.buttonsBottom}>
+                <div className={styles.saveButton}>
+                  <ButtonUI type="button" onClick={handleSubmit(onSubmit)}>
+                    Сохранить
+                  </ButtonUI>
+                </div>
+                <div className={styles.saveButton}>
+                  <ButtonUI type="button" onClick={handleDelete}>
+                    Удалить
+                  </ButtonUI>
+                </div>
+                <div className={styles.techRequestButton}>
                 <ButtonUI type="button" onClick={handleSubmit(onSubmit)}>
-                  Сохранить
+                  Запись на ТО и ремонт
                 </ButtonUI>
+                </div>
               </div>
             </form>
           </div>

@@ -7,10 +7,16 @@ import { ItsRange } from "./itsRange";
 
 interface IItsProps extends React.InputHTMLAttributes<HTMLInputElement> {
   its_val: number;
+  label?: string;
   register?: UseFormRegister<any>;
 }
 
-export const Its: React.FC<IItsProps> = ({ its_val, register, ...props }) => {
+export const Its: React.FC<IItsProps> = ({
+  its_val,
+  label = "Индекс технического состояния (ИТС)",
+  register,
+  ...props
+}) => {
   // Определяем элемент диапазона по its_val
   const range = useMemo(() => ItsRange.find((item) => its_val >= item.its_min && its_val <= item.its_max), [its_val]);
 
@@ -20,20 +26,27 @@ export const Its: React.FC<IItsProps> = ({ its_val, register, ...props }) => {
   const field: IInputField = {
     id: "its",
     type: "number",
-    label: "Индекс технического состояния (ИТС)",
+    customClassName: "short",
+    max: 100,
+    min: 0,
   };
 
   return (
     <div className={styles["its"]}>
-      <div className={styles["its__value"]}>
-        {register ? (
-          <InputUI key={field.id} field={field} register={register} />
-        ) : (
-          <div className={styles["its__val_txt"]}>{its_val}</div>
-        )}
+      <label className={styles["its__label"]}>{label}</label>
+      <div className={styles["its__box"]}>
+        <div className={styles["its__value"]}>
+          {register ? (
+            <InputUI key={field.id} field={field} register={register} />
+          ) : (
+            <div className={styles["its__valTxt"]}>{its_val}</div>
+          )}
+        </div>
+        <div className={styles["its__mark"]}>
+          <div className={`${styles["its__color"]} ${itsColorClass ? styles[itsColorClass] : ""}`}></div>
+          <div className={styles["its__descr"]}>{itsDescr}</div>
+        </div>
       </div>
-      <div className={`${styles["its__color_class"]} ${itsColorClass ? styles[itsColorClass] : ""}`}></div>
-      <div className={styles["its__descr"]}>{itsDescr}</div>
     </div>
   );
 };
