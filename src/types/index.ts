@@ -12,6 +12,15 @@ export interface IUser {
 
 export type UserRole = "user" | "admin";
 
+export interface IUnit {
+  unit_id: number,
+  name: string,
+  car_id: number,
+  date_repair: string,
+  its: number,
+  info: string,
+  image_url: string
+}
 export interface ICar {
   car_id: number,
   name: string,
@@ -22,7 +31,8 @@ export interface ICar {
   its: number,
   info: string,
   image_url?: string,
-  person?: IUser
+  person?: IUser,
+  units?: IUnit[],
 }
 
 // Типы для состояния Redux

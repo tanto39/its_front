@@ -5,11 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../store/helpers";
 import { IMessage } from "../../types/index";
 import ButtonUI from "../UI/ButtonUI/ButtonUI";
 
-interface MessageModalProps {
-  onConfirm?: () => void;
-}
-
-export const MessageModal: React.FC<MessageModalProps> = ({ onConfirm }) => {
+export const MessageModal: React.FC = () => {
   const { message } = useAppSelector((state) => state.message);
   const dispatch = useAppDispatch();
 
@@ -23,8 +19,8 @@ export const MessageModal: React.FC<MessageModalProps> = ({ onConfirm }) => {
   };
 
   const handleConfirm = () => {
-    if (onConfirm) {
-      onConfirm();
+    if (message.onConfirm) {
+      message.onConfirm();
     }
     closeModal();
   };

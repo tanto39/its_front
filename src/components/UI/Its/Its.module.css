@@ -1,11 +1,18 @@
 .its{
   margin-top: 10px;
 }
+.itsSmall {
+  margin: 0;
+}
 .its__box {
   display: flex;
   align-items: flex-start;
   gap: 16px;
   margin: 10px 0;
+}
+.itsSmall .its__box{
+  margin: 0;
+  gap: 8px;
 }
 .its__label {
   display: block;
@@ -20,17 +27,30 @@
   font-size: 57px;
   line-height: 1;
 }
+
+.itsSmall .its__valTxt {
+  font-size: 32px;
+}
+
 .its__mark {
   display: flex;
   align-items: center;
   height: 57px;
   gap: 16px;
 }
+.itsSmall .its__mark {
+  height: 32px;
+  gap: 8px;
+}
+
 .its__color {
   width: 57px;
   height: 100%;
   border-radius: 2px;
   background-color: #ccc;
+}
+.itsSmall .its__color {
+    width: 32px;
 }
 
 /* Цветовые классы для диапазонов */

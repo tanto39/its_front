@@ -38,7 +38,7 @@ export const fetchCar = createAsyncThunk("cars/fetchById", async (id: number, { 
   }
 });
 
-export const createCar = createAsyncThunk("cars/create", async (data: Omit<ICar, "car_id">, { rejectWithValue }) => {
+export const createCar = createAsyncThunk("cars/create", async ({ data }: { data: ICar }, { rejectWithValue }) => {
   try {
     const response = await ApiCars.createCar(data);
     if (response.car_id) {
@@ -191,8 +191,6 @@ const CarsSlice = createSlice({
           const indexOp = state.optionsCars.findIndex((p) => p.value === action.payload.car_id);
           state.optionsCars.splice(indexOp, 1);
         }
-
-        state.successSend = true;
       })
       .addCase(deleteCar.rejected, (state, action) => {
         state.isLoading = false;

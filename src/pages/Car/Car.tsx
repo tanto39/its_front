@@ -8,13 +8,14 @@ import InputUI from "../../components/UI/InputUI/InputUI";
 import Loader from "../../components/UI/Loader/Loader";
 import { useAppDispatch, useAppSelector } from "../../store/helpers";
 import { setMessage } from "../../store/slices/message";
-import { clearSend, fetchCar, updateCar, deleteCar } from "../../store/slices/carsSlice";
+import { clearSend, fetchCar, updateCar, deleteCar, setCurrentCar, createCar } from "../../store/slices/carsSlice";
 import { carFormData } from "../../types/forms";
 import { ICar, IMessage, IUrlParam, IUser } from "../../types/index";
 import { inputFields } from "./inputFields";
 import SelectUI from "../../components/UI/SelectUI/SelectUI";
 import { useUsers } from "../../hooks/useUsers";
 import { Its } from "../../components/UI/Its/Its";
+import Units from "../../components/Units/Units";
 
 const Car: React.FC = () => {
   const navigate = useNavigate();
@@ -37,7 +38,12 @@ const Car: React.FC = () => {
 
   useEffect(() => {
     const paramsId: number = Number(params.id);
-    if (!car.car_id || paramsId !== car.car_id) {
+    if (paramsId === 0) {
+      // Если автомобиль ещё не создан или его id не равен 0
+      if (!car || car.car_id !== 0) {
+        dispatch(setCurrentCar({ car_id: 0 } as ICar));
+      }
+    } else if (!car || car.car_id !== paramsId) {
       dispatch(fetchCar(paramsId));
     }
     if (car) {
@@ -77,7 +83,16 @@ const Car: React.FC = () => {
 
   const onSubmit: SubmitHandler<carFormData> = async (formData) => {
     const carData: ICar = { ...formData, person: { login: selectedPerson as string } as IUser };
-    dispatch(updateCar({ id: car?.car_id as number, data: carData }));
+    if (car.car_id == 0) {
+      const resultAction = await dispatch(createCar({ data: carData }));
+      // Проверяем, что действие выполнилось успешно
+      if (createCar.fulfilled.match(resultAction)) {
+        const newCar = resultAction.payload as ICar;
+        navigate(`/cars/${newCar.car_id}`);
+      }
+    } else {
+      dispatch(updateCar({ id: car?.car_id as number, data: carData }));
+    }
   };
 
   const handleDelete = () => {
@@ -88,8 +103,8 @@ const Car: React.FC = () => {
         message: <p>Вы уверены, что хотите удалить этот автомобиль?</p>,
         onConfirm: () => {
           dispatch(deleteCar({ id: car.car_id }));
-          navigate('/cars');
-        }
+          navigate("/cars");
+        },
       };
       dispatch(setMessage(confirmMessage));
     }
@@ -102,7 +117,7 @@ const Car: React.FC = () => {
       {car && (
         <div className="pageWrap">
           <h1 className="heading">
-            {car.name} {car.car_id}
+            {car.name} {car.car_id > 0 ? car.car_id : "Добавление автомобиля"}
           </h1>
           <div className={`contentBlock ${styles.formWrap}`}>
             <form className={styles.form}>
@@ -133,13 +148,15 @@ const Car: React.FC = () => {
                   </ButtonUI>
                 </div>
                 <div className={styles.techRequestButton}>
-                <ButtonUI type="button" onClick={handleSubmit(onSubmit)}>
-                  Запись на ТО и ремонт
-                </ButtonUI>
+                  <ButtonUI type="button" onClick={handleSubmit(onSubmit)}>
+                    Запись на ТО и ремонт
+                  </ButtonUI>
                 </div>
               </div>
             </form>
           </div>
+
+          {car.units && <Units units={car.units} />}
         </div>
       )}
     </main>

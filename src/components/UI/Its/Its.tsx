@@ -8,12 +8,14 @@ import { ItsRange } from "./itsRange";
 interface IItsProps extends React.InputHTMLAttributes<HTMLInputElement> {
   its_val: number;
   label?: string;
+  customClassName?: string;
   register?: UseFormRegister<any>;
 }
 
 export const Its: React.FC<IItsProps> = ({
   its_val,
   label = "Индекс технического состояния (ИТС)",
+  customClassName,
   register,
   ...props
 }) => {
@@ -32,7 +34,7 @@ export const Its: React.FC<IItsProps> = ({
   };
 
   return (
-    <div className={styles["its"]}>
+    <div className={`${styles["its"]} ${customClassName ? styles[customClassName] : ""}`}>
       <label className={styles["its__label"]}>{label}</label>
       <div className={styles["its__box"]}>
         <div className={styles["its__value"]}>
