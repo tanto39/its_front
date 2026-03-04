@@ -2,6 +2,7 @@ import { API_BASE_URL } from "../constants";
 
 interface RequestOptions extends RequestInit {
   headers?: Record<string, string>;
+  contentType?: string | false;
 }
 
 class ApiClient {
@@ -9,9 +10,7 @@ class ApiClient {
     const url = `${API_BASE_URL}${endpoint}`;
 
     // Добавляем заголовки по умолчанию
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: "",
+    const headers: Record<string, string> = {
       ...options.headers,
     };
 
@@ -19,6 +18,10 @@ class ApiClient {
     const token = localStorage.getItem("token");
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    if (options.contentType !== false && !headers["Content-Type"]) {
+      headers["Content-Type"] = "application/json";
     }
 
     const config: RequestInit = {
@@ -69,6 +72,22 @@ class ApiClient {
 
   async delete<T>(endpoint: string): Promise<T> {
     return this.request<T>(endpoint, { method: "DELETE" });
+  }
+
+  async postFormData<T>(endpoint: string, formData: FormData): Promise<T> {
+    return this.request<T>(endpoint, {
+      method: "POST",
+      body: formData,
+      contentType: false, // браузер сам выставит правильный Content-Type
+    });
+  }
+
+  async putFormData<T>(endpoint: string, formData: FormData): Promise<T> {
+    return this.request<T>(endpoint, {
+      method: "PUT",
+      body: formData,
+      contentType: false,
+    });
   }
 }
 

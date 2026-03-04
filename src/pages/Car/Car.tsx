@@ -16,6 +16,7 @@ import SelectUI from "../../components/UI/SelectUI/SelectUI";
 import { useUsers } from "../../hooks/useUsers";
 import { Its } from "../../components/UI/Its/Its";
 import Units from "../../components/Units/Units";
+import ImageBlock from "../../components/UI/ImageBlock/ImageBlock";
 
 const Car: React.FC = () => {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ const Car: React.FC = () => {
 
   // Инициализируем selectedProfile из формы или из currentDoctor
   const [selectedPerson, setSelectedPerson] = useState<string | number>(watchPerson || car.person?.login || "");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   useEffect(() => {
     const paramsId: number = Number(params.id);
@@ -62,6 +64,10 @@ const Car: React.FC = () => {
     }
   }, [dispatch, car, setValue, params.id]);
 
+  const handleFileSelect = (file: File | null) => {
+    setSelectedFile(file);
+  };
+
   if (error) {
     messageSet.type = "E";
     messageSet.title = "Error";
@@ -82,16 +88,30 @@ const Car: React.FC = () => {
   }
 
   const onSubmit: SubmitHandler<carFormData> = async (formData) => {
-    const carData: ICar = { ...formData, person: { login: selectedPerson as string } as IUser };
+    const formDataToSend = new FormData();
+
+    // Добавляем все поля формы
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("reg_number", formData.reg_number || "");
+    formDataToSend.append("date_tech", formData.date_tech || "");
+    formDataToSend.append("date_repair", formData.date_repair || "");
+    formDataToSend.append("milage", String(formData.milage || ""));
+    formDataToSend.append("info", formData.info || "");
+    formDataToSend.append("person", selectedPerson as string);
+
+    if (selectedFile) {
+      formDataToSend.append("image", selectedFile);
+    }
+
     if (car.car_id == 0) {
-      const resultAction = await dispatch(createCar({ data: carData }));
+      const resultAction = await dispatch(createCar(formDataToSend));
       // Проверяем, что действие выполнилось успешно
       if (createCar.fulfilled.match(resultAction)) {
         const newCar = resultAction.payload as ICar;
         navigate(`/cars/${newCar.car_id}`);
       }
     } else {
-      dispatch(updateCar({ id: car?.car_id as number, data: carData }));
+      dispatch(updateCar({ id: car?.car_id as number, formData: formDataToSend }));
     }
   };
 
@@ -154,6 +174,8 @@ const Car: React.FC = () => {
                 </div>
               </div>
             </form>
+
+            <ImageBlock imageUrl={car.image_url} onFileSelect={handleFileSelect} />
           </div>
 
           {car.units && <Units units={car.units} />}

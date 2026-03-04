@@ -38,9 +38,9 @@ export const fetchCar = createAsyncThunk("cars/fetchById", async (id: number, { 
   }
 });
 
-export const createCar = createAsyncThunk("cars/create", async ({ data }: { data: ICar }, { rejectWithValue }) => {
+export const createCar = createAsyncThunk("cars/create", async (formData: FormData, { rejectWithValue }) => {
   try {
-    const response = await ApiCars.createCar(data);
+    const response = await ApiCars.createCar(formData);
     if (response.car_id) {
       return response;
     } else {
@@ -53,9 +53,9 @@ export const createCar = createAsyncThunk("cars/create", async ({ data }: { data
 
 export const updateCar = createAsyncThunk(
   "cars/update",
-  async ({ id, data }: { id: number; data: Partial<ICar> }, { rejectWithValue }) => {
+  async ({ id, formData }: { id: number; formData: FormData }, { rejectWithValue }) => {
     try {
-      const response = await ApiCars.updateCar(id, data);
+      const response = await ApiCars.updateCar(id, formData);
       if (response.car_id) {
         return response;
       } else {
