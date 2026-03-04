@@ -42,12 +42,12 @@ const ImageBlock: React.FC<ImageBlockProps> = ({ imageUrl, onFileSelect, classNa
 
   return (
     <div className={`${styles.imageBlock} ${className}`}>
-      {previewUrl ? (
+      {previewUrl && !previewUrl.includes('undefined') ? (
         <div className={styles.previewWrapper}>
           <img src={previewUrl} alt="Предпросмотр" className={styles.preview} />
         </div>
       ) : (
-        <div className={styles.placeholder}>Нет изображения</div>
+        <img src='/public/images/no-image.jpg' alt="Предпросмотр" className={styles.preview} />
       )}
       <input type="file" accept="image/*" onChange={handleFileChange} ref={fileInputRef} className={styles.fileInput} />
     </div>
