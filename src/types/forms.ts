@@ -33,5 +33,14 @@ export interface carFormData {
   milage: number,
   its: number,
   info: string,
-  person_login: string,
+  person: string,
+}
+
+export interface unitFormData {
+  unit_id: number,
+  name: string,
+  car_id: string,
+  date_repair: string,
+  its: number,
+  info: string,
 }

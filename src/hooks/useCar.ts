@@ -22,7 +22,7 @@ export function useCar() {
   const { register, handleSubmit, getValues, setValue, watch } = useForm<carFormData>();
 
   // Получаем значение id_medical_profile из формы
-  const watchPerson = watch("person_login");
+  const watchPerson = watch("person");
 
   // Инициализируем selectedProfile из формы или из currentDoctor
   const [selectedPerson, setSelectedPerson] = useState<string | number>(watchPerson || car.person?.login || "");
@@ -48,7 +48,7 @@ export function useCar() {
       setValue("its", car.its);
       setValue("info", car.info);
       if (car.person?.login) {
-        setValue("person_login", car.person.login);
+        setValue("person", car.person.login);
         setSelectedPerson(car.person.login);
       }
     }

@@ -3,12 +3,14 @@ import authSlice from './slices/authSlice';
 import messageSlice from './slices/message';
 import carsSlice from './slices/carsSlice';
 import usersSlice from './slices/usersSlice';
+import unitSlice from './slices/unitSlice';
 
 const rootReducer = combineReducers({
     auth: authSlice,
     message: messageSlice,
     cars: carsSlice,
     users: usersSlice,
+    unit: unitSlice,
 });
 
 const store = configureStore({

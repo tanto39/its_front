@@ -13,26 +13,26 @@ export interface IUser {
 export type UserRole = "user" | "admin";
 
 export interface IUnit {
-  unit_id: number,
-  name: string,
-  car_id: number,
-  date_repair: string,
-  its: number,
-  info: string,
-  image_url: string
+  unit_id: number;
+  name: string;
+  car_id: number;
+  date_repair: string;
+  its: number;
+  info: string;
+  image_url: string;
 }
 export interface ICar {
-  car_id: number,
-  name: string,
-  reg_number: string,
-  date_tech: string,
-  date_repair: string,
-  milage: number,
-  its: number,
-  info: string,
-  image_url?: string,
-  person?: IUser,
-  units?: IUnit[],
+  car_id: number;
+  name: string;
+  reg_number: string;
+  date_tech: string;
+  date_repair: string;
+  milage: number;
+  its: number;
+  info: string;
+  image_url?: string;
+  person?: IUser;
+  units?: IUnit[];
 }
 
 // Типы для состояния Redux
@@ -58,6 +58,13 @@ export interface CarsState {
   optionsCars: SelectOption[];
   isLoading: boolean;
   isGetCars: boolean;
+  error: string | null;
+  successSend: boolean;
+}
+
+export interface UnitState {
+  unit: IUnit;
+  isLoading: boolean;
   error: string | null;
   successSend: boolean;
 }
