@@ -41,13 +41,9 @@
 }
 
 .message {
+  margin-top: 20px;
   font-size: 20px;
   line-height: 22px;
-}
-
-.message p{
-  line-height: 22px;
-  margin-top: 20px;
 }
 
 .confirmButtons {
