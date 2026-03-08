@@ -25,10 +25,13 @@ export function useCar() {
   const watchPerson = watch("person");
 
   // Инициализируем selectedProfile из формы или из currentDoctor
-  const [selectedPerson, setSelectedPerson] = useState<string | number>(watchPerson || car.person?.login || "");
+  const [selectedPerson, setSelectedPerson] = useState<string | number>(watchPerson || car?.person?.login || "");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
+    if (isDeleting) return;
+
     const paramsId: number = Number(params.id);
     if (paramsId === 0) {
       // Если автомобиль ещё не создан или его id не равен 0
@@ -52,7 +55,7 @@ export function useCar() {
         setSelectedPerson(car.person.login);
       }
     }
-  }, [dispatch, car, setValue, params.id]);
+  }, [dispatch, car, setValue, params.id, isDeleting]);
 
   const handleFileSelect = (file: File | null) => {
     setSelectedFile(file);
@@ -89,7 +92,7 @@ export function useCar() {
       formDataToSend.append("image", selectedFile);
     }
 
-    if (car.car_id == 0) {
+    if (car?.car_id == 0) {
       const resultAction = await dispatch(createCar(formDataToSend));
       // Проверяем, что действие выполнилось успешно
       if (createCar.fulfilled.match(resultAction)) {
@@ -107,9 +110,15 @@ export function useCar() {
         type: "C",
         title: "Подтверждение удаления",
         message: "Вы уверены, что хотите удалить этот автомобиль?",
-        onConfirm: () => {
-          dispatch(deleteCar({ id: car.car_id }));
-          navigate("/cars");
+        onConfirm: async () => {
+          setIsDeleting(true); // блокируем дальнейшие запросы
+          try {
+            await dispatch(deleteCar({ id: car.car_id })).unwrap();
+            navigate("/cars");
+          } catch (err) {
+            console.error("Ошибка удаления:", err);
+            setIsDeleting(false); // при ошибке снимаем блокировку
+          }
         },
       };
       dispatch(setMessage(confirmMessage));

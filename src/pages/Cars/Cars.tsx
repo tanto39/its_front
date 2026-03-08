@@ -22,7 +22,7 @@ const Cars: React.FC = () => {
         </ButtonUI>
       </div>
       <div className={styles.cars}>
-        {cars.map((car) => (
+        {cars?.map((car) => (
           <CarsItem key={car.car_id} car={car} />
         ))}
       </div>

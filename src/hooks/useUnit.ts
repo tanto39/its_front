@@ -16,20 +16,25 @@ export function useUnit() {
   const { unit, isLoading, error, successSend } = useAppSelector((state) => state.unit);
   const { optionsCars } = useCars();
   const { user } = useAppSelector((state) => state.auth);
+  const { car } = useAppSelector((state) => state.cars);
   const dispatch = useAppDispatch();
 
   const params = useParams<IUrlParam>();
 
-  const { register, handleSubmit, getValues, setValue, watch } = useForm<unitFormData>();
+  const formMethods = useForm<unitFormData>();
+  const { register, handleSubmit, getValues, setValue, watch } = formMethods;
 
   // Получаем значение car_id из формы
   const watchCar = watch("car_id");
 
-  // Инициализируем selectedCar из формы или из unit
-  const [selectedCar, setSelectedCar] = useState<string | number>(watchCar || unit?.car_id || "");
+  // Инициализируем selectedCar из carSlice
+  const [selectedCar, setSelectedCar] = useState<string | number>(car?.car_id || watchCar || unit?.car_id || "");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
+    if (isDeleting) return;
+
     const paramsId: number = Number(params.id);
     if (paramsId === 0) {
       // Если агрегат ещё не создан или его id не равен 0
@@ -50,7 +55,7 @@ export function useUnit() {
         setSelectedCar(unit.car_id);
       }
     }
-  }, [dispatch, unit, setValue, params.id]);
+  }, [dispatch, unit, setValue, params.id, car, isDeleting]);
 
   const handleFileSelect = (file: File | null) => {
     setSelectedFile(file);
@@ -85,16 +90,16 @@ export function useUnit() {
       formDataToSend.append("image", selectedFile);
     }
 
-    if (unit?.unit_id == 0) {
-      const resultAction = await dispatch(createUnit(formDataToSend));
-      // Проверяем, что действие выполнилось успешно
-      if (createUnit.fulfilled.match(resultAction)) {
-        const newUnit = resultAction.payload as IUnit;
-        navigate(`/units/${newUnit.unit_id}`);
-      }
+    if (unit?.unit_id === 0) {
+      // Создание нового агрегата
+      await dispatch(createUnit(formDataToSend)).unwrap();
     } else {
-      dispatch(updateUnit({ id: unit?.unit_id as number, formData: formDataToSend }));
+      // Обновление существующего
+      await dispatch(updateUnit({ id: unit!.unit_id, formData: formDataToSend })).unwrap();
     }
+
+    dispatch(clearCurrentCar());
+    navigate(`/cars/${selectedCar}`);
   };
 
   const handleDelete = () => {
@@ -103,10 +108,16 @@ export function useUnit() {
         type: "C",
         title: "Подтверждение удаления",
         message: "Вы уверены, что хотите удалить этот агрегат?",
-        onConfirm: () => {
-          dispatch(deleteUnit({ id: unit.unit_id }));
-          dispatch(clearCurrentCar());
-          navigate(`/cars/${unit.car_id}`);
+        onConfirm: async () => {
+          setIsDeleting(true); // блокируем дальнейшие запросы
+          try {
+            await dispatch(deleteUnit({ id: unit.unit_id })).unwrap();
+            dispatch(clearCurrentCar());
+            navigate(`/cars/${unit.car_id}`);
+          } catch (err) {
+            console.error("Ошибка удаления:", err);
+            setIsDeleting(false); // при ошибке снимаем блокировку
+          }
         },
       };
       dispatch(setMessage(confirmMessage));
@@ -115,6 +126,7 @@ export function useUnit() {
 
   return {
     unit,
+    car,
     optionsCars,
     isLoading,
     error,
@@ -122,9 +134,8 @@ export function useUnit() {
     onSubmit,
     handleDelete,
     handleFileSelect,
-    register,
-    handleSubmit,
+    formMethods,
     selectedCar,
-    setSelectedCar
+    setSelectedCar,
   };
 }

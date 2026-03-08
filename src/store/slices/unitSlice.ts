@@ -3,7 +3,7 @@ import { ApiUnit } from "../../api/apiUnit";
 import { IUnit, UnitState } from "../../types/index";
 
 const initialState: UnitState = {
-  unit: {} as IUnit,
+  unit: null,
   isLoading: false,
   error: null,
   successSend: false,
@@ -69,7 +69,7 @@ const UnitSlice = createSlice({
   initialState,
   reducers: {
     clearCurrentUnit: (state) => {
-      state.unit = {} as IUnit;
+      state.unit = null;
     },
     setCurrentUnit: (state, action: PayloadAction<IUnit>) => {
       state.unit = action.payload;
@@ -135,7 +135,7 @@ const UnitSlice = createSlice({
       })
       .addCase(deleteUnit.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.unit = {} as IUnit;
+        state.unit = null;
       })
       .addCase(deleteUnit.rejected, (state, action) => {
         state.isLoading = false;

@@ -10,10 +10,12 @@ import { Its } from "../../components/UI/Its/Its";
 import ImageBlock from "../../components/UI/ImageBlock/ImageBlock";
 import { useUnit } from "../../hooks/useUnit";
 import { useAppSelector } from "../../store/helpers";
+import { FormProvider } from "react-hook-form";
 
 const Unit: React.FC = () => {
   const {
     unit,
+    car,
     optionsCars,
     isLoading,
     error,
@@ -21,13 +23,10 @@ const Unit: React.FC = () => {
     onSubmit,
     handleDelete,
     handleFileSelect,
-    register,
-    handleSubmit,
+    formMethods,
     selectedCar,
     setSelectedCar,
   } = useUnit();
-
-  const { car } = useAppSelector((state) => state.cars);
 
   return (
     <main className={styles.unitPageWrap}>
@@ -36,7 +35,7 @@ const Unit: React.FC = () => {
       {unit && user && (
         <div className="pageWrap">
           <h1 className="heading">
-            {unit.name} {unit.unit_id > 0 ? unit.unit_id : "Добавление агрегата"}
+            {unit.name} {unit.unit_id > 0 ? unit.unit_id : "Добавление сборочной единицы"}
           </h1>
           <div className={`contentBlock ${styles.formWrap}`}>
             <form className={styles.form}>
@@ -45,9 +44,9 @@ const Unit: React.FC = () => {
                   key={field.id}
                   field={{
                     ...field,
-                    disabled: (user.role_name !== "admin" && car.person?.login !== user.login) ? true : field.disabled,
+                    disabled: user.role_name !== "admin" && car?.person?.login !== user.login ? true : field.disabled,
                   }}
-                  register={register}
+                  register={formMethods.register}
                 />
               ))}
 
@@ -58,15 +57,17 @@ const Unit: React.FC = () => {
                 placeholder="Автомобиль"
                 searchPlaceholder="Поиск"
                 label="Автомобиль"
-                disabled={(user.role_name !== "admin" && car.person?.login !== user.login) ? true : false}
+                disabled={user.role_name !== "admin" && car?.person?.login !== user.login ? true : false}
               />
 
-              <Its its_val={unit.its} />
+              <FormProvider {...formMethods}>
+                <Its register={formMethods.register} />
+              </FormProvider>
 
-              {(user.role_name == "admin" || car.person?.login == user.login) && (
+              {(user.role_name == "admin" || car?.person?.login == user.login) && (
                 <div className={styles.buttonsBottom}>
                   <div className={styles.saveButton}>
-                    <ButtonUI type="button" onClick={handleSubmit(onSubmit)}>
+                    <ButtonUI type="button" onClick={formMethods.handleSubmit(onSubmit)}>
                       Сохранить
                     </ButtonUI>
                   </div>

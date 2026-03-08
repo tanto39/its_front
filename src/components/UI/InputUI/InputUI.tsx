@@ -9,7 +9,6 @@ interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const InputUI: React.FC<IInputProps> = ({ field, register, ...props }) => {
-
   const commonProps = useMemo(() => {
     return {
       id: field.id,
@@ -21,24 +20,30 @@ const InputUI: React.FC<IInputProps> = ({ field, register, ...props }) => {
       "aria-label": field.placeholder,
       required: field.required,
       disabled: field.disabled,
-      max:field.max,
-      min:field.min,
+      max: field.max,
+      min: field.min,
     };
   }, [field]);
 
   return (
     <div className={styles["inputUI"]}>
-      <label htmlFor={field.id} className={styles["inputUI__label"]}>
-        {field.label}
-      </label>
+      {field.label && (
+        <label htmlFor={field.id} className={styles["inputUI__label"]}>
+          {field.label}
+        </label>
+      )}
       {register ? (
         // Используем register из react-hook-form
-        field.is_textarea ? <textarea {...commonProps} {...register(field.id)} />
-        : <input {...commonProps} {...register(field.id)} />
+        field.is_textarea ? (
+          <textarea {...commonProps} {...register(field.id)} />
+        ) : (
+          <input {...commonProps} {...register(field.id)} />
+        )
+      ) : // Используем явно переданные пропсы
+      field.is_textarea ? (
+        <textarea {...commonProps} />
       ) : (
-        // Используем явно переданные пропсы
-        field.is_textarea ? <textarea {...commonProps} />
-        : <input {...commonProps} {...props} />
+        <input {...commonProps} {...props} />
       )}
     </div>
   );

@@ -5,7 +5,7 @@ import { ICar, CarsState } from "../../types/index";
 const initialState: CarsState = {
   cars: [],
   optionsCars: [],
-  car: {} as ICar,
+  car: null,
   isLoading: false,
   isGetCars: false,
   error: null,
@@ -85,7 +85,10 @@ const CarsSlice = createSlice({
   initialState,
   reducers: {
     clearCurrentCar: (state) => {
-      state.car = {} as ICar;
+      state.car = null;
+    },
+    clearCars: (state) => {
+      state.cars = null;
     },
     setCurrentCar: (state, action: PayloadAction<ICar>) => {
       state.car = action.payload;
@@ -142,13 +145,9 @@ const CarsSlice = createSlice({
       .addCase(createCar.fulfilled, (state, action) => {
         state.isLoading = false;
         state.car = action.payload;
-        state.cars.push(action.payload);
-        state.optionsCars.push({
-          value: state.car.car_id,
-          label: state.car.name,
-        });
-
         state.successSend = true;
+        state.cars = null;
+        state.isGetCars = false;
       })
       .addCase(createCar.rejected, (state, action) => {
         state.isLoading = false;
@@ -163,14 +162,9 @@ const CarsSlice = createSlice({
       .addCase(updateCar.fulfilled, (state, action) => {
         state.isLoading = false;
         state.car = action.payload;
-        // Обновляем в списке
-        if (state.cars.length > 0) {
-          const index = state.cars.findIndex((p) => p.car_id === action.payload.car_id);
-          state.cars[index] = action.payload;
-          const indexOp = state.optionsCars.findIndex((p) => p.value === action.payload.car_id);
-          state.optionsCars[indexOp].label = action.payload.name;
-        }
         state.successSend = true;
+        state.cars = null;
+        state.isGetCars = false;
       })
       .addCase(updateCar.rejected, (state, action) => {
         state.isLoading = false;
@@ -184,13 +178,8 @@ const CarsSlice = createSlice({
       })
       .addCase(deleteCar.fulfilled, (state, action) => {
         state.isLoading = false;
-        // Обновляем в списке
-        if (state.cars.length > 0) {
-          const index = state.cars.findIndex((p) => p.car_id === action.payload.car_id);
-          state.cars.splice(index, 1);
-          const indexOp = state.optionsCars.findIndex((p) => p.value === action.payload.car_id);
-          state.optionsCars.splice(indexOp, 1);
-        }
+        state.cars = null;
+        state.isGetCars = false;
       })
       .addCase(deleteCar.rejected, (state, action) => {
         state.isLoading = false;
@@ -200,7 +189,7 @@ const CarsSlice = createSlice({
 });
 
 // Экспортируем actions
-export const { clearCurrentCar, setCurrentCar, clearError, clearSend } = CarsSlice.actions;
+export const { clearCurrentCar, clearCars, setCurrentCar, clearError, clearSend } = CarsSlice.actions;
 
 // Экспортируем reducer
 export default CarsSlice.reducer;

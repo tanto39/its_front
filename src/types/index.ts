@@ -53,8 +53,8 @@ export interface UsersState {
 }
 
 export interface CarsState {
-  cars: ICar[];
-  car: ICar;
+  cars: ICar[] | null;
+  car: ICar | null;
   optionsCars: SelectOption[];
   isLoading: boolean;
   isGetCars: boolean;
@@ -63,7 +63,7 @@ export interface CarsState {
 }
 
 export interface UnitState {
-  unit: IUnit;
+  unit: IUnit | null;
   isLoading: boolean;
   error: string | null;
   successSend: boolean;
