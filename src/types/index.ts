@@ -8,6 +8,7 @@ export interface IUser {
   first_name: string;
   middle_name?: string;
   role_name: UserRole;
+  password?: string;
 }
 
 export type UserRole = "user" | "admin";
@@ -33,6 +34,18 @@ export interface ICar {
   image_url?: string;
   person?: IUser;
   units?: IUnit[];
+}
+
+export type RequestType = "to" | "repair";
+
+export interface ITechRequest {
+  request_id: number,
+  request_type: RequestType,
+  car_id: number,
+  date_repair: string,
+  info: string,
+  person?: IUser;
+  car?: ICar;
 }
 
 // Типы для состояния Redux
@@ -69,6 +82,33 @@ export interface UnitState {
   successSend: boolean;
 }
 
+export interface TechRequestState {
+  techRequests: ITechRequest[] | null;
+  techRequest: ITechRequest | null;
+  isLoading: boolean;
+  isGetTechRequests: boolean;
+  error: string | null;
+  successSend: boolean;
+}
+
+export interface FilterState {
+  name: string;
+  reg_number: string;
+  car_id: string;
+  person: string;
+  its: 'all' | '70-100' | '30-69' | '0-29';
+  sort: 'name_asc' | 'name_desc' | 'its_asc' | 'its_desc';
+}
+
+export interface FilterTechRequestState {
+  request_id: string,
+  request_type: 'all' | 'to' | 'repair',
+  car_id: string,
+  date_repair: string,
+  person: string;
+  sort: 'name_asc' | 'name_desc' | 'date_repair_asc' | 'date_repair_desc';
+}
+
 export interface IMessage {
   type: string;
   title: string;
@@ -78,11 +118,6 @@ export interface IMessage {
 
 export interface IMessageSlice {
   message: IMessage;
-}
-
-// Root state
-export interface RootState {
-  auth: AuthState;
 }
 
 export type IUrlParam = {

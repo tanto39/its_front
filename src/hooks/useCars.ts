@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../store/helpers";
 import { fetchCars } from "../store/slices/carsSlice";
 import { setMessage } from "../store/slices/message";
 import { IMessage } from "../types/index";
+import { useFilter } from "./useFilter";
 
 export function useCars() {
     const messageSet: IMessage = {} as IMessage;
@@ -23,5 +24,7 @@ export function useCars() {
       dispatch(setMessage(messageSet));
     }
     
-  return { cars, optionsCars, isLoading, error };
+  const filteredSortedCars = useFilter(cars);
+
+  return { cars, filteredSortedCars, optionsCars, isLoading, error };
 }

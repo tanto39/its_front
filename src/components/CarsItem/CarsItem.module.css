@@ -1,0 +1,43 @@
+.car {
+  display: flex;
+  border: 2px solid var(--border-color);
+  border-radius: 30px;
+  padding: 32px;
+  gap: 5%;
+  cursor: pointer;
+  margin-bottom: 20px;
+  background: var(--block-color);
+  transition: box-shadow 0.2s ease-in-out;
+}
+.car:hover {
+  box-shadow: 0px 0px 0.5rem rgb(0, 0, 0);
+}
+.car__img {
+  width: 250px;
+}
+.car__info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 24px;
+}
+.car__title {
+  font-size: 32px;
+}
+.car__its {
+  display: flex;
+  gap: 10px;
+  margin: 0 20px 0 auto;
+}
+.car__labelIts {
+  font-size: 32px;
+  line-height: 1;
+}
+.car__nums {
+  display: flex;
+  justify-content: space-between;
+}
+.car__uid {
+}
+.car__regnum {
+}

@@ -1,4 +1,4 @@
-import { UserRole } from "./index.ts";
+import { RequestType, UserRole } from "./index.ts";
 
 // Типы для форм
 export interface IInputField {
@@ -34,6 +34,15 @@ export interface carFormData {
   its: number,
   info: string,
   person: string,
+}
+
+export interface techRequestForm {
+  request_id: number,
+  request_type: string,
+  car_id: number,
+  date_repair: string,
+  info: string,
+  person: string;
 }
 
 export interface unitFormData {

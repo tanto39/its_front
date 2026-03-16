@@ -4,6 +4,9 @@ import messageSlice from './slices/message';
 import carsSlice from './slices/carsSlice';
 import usersSlice from './slices/usersSlice';
 import unitSlice from './slices/unitSlice';
+import FilterSlice from './slices/filterSlice';
+import TechRequestSlice from './slices/techRequestSlice';
+import FilterTechRequestSlice from './slices/filterTechRequestSlice';
 
 const rootReducer = combineReducers({
     auth: authSlice,
@@ -11,6 +14,9 @@ const rootReducer = combineReducers({
     cars: carsSlice,
     users: usersSlice,
     unit: unitSlice,
+    filter: FilterSlice,
+    techRequest: TechRequestSlice,
+    filterTechRequest: FilterTechRequestSlice,
 });
 
 const store = configureStore({
