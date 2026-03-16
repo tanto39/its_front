@@ -13,6 +13,11 @@ export interface IUser {
 
 export type UserRole = "user" | "admin";
 
+export interface AuthResponse {
+  user: IUser;
+  token?: string;
+}
+
 export interface IUnit {
   unit_id: number;
   name: string;
@@ -46,6 +51,15 @@ export interface ITechRequest {
   info: string,
   person?: IUser;
   car?: ICar;
+}
+
+export interface IStats {
+  avgIts: number,
+  totalCars: number,
+  count70_100: number,
+  count30_69: number,
+  count0_29: number,
+  totalRequests: number
 }
 
 // Типы для состояния Redux
@@ -107,6 +121,12 @@ export interface FilterTechRequestState {
   date_repair: string,
   person: string;
   sort: 'name_asc' | 'name_desc' | 'date_repair_asc' | 'date_repair_desc';
+}
+
+export interface StatsState {
+  stats: IStats | null;
+  isLoading: boolean;
+  error: string | null;
 }
 
 export interface IMessage {

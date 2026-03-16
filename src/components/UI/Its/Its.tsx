@@ -10,6 +10,7 @@ interface IItsProps extends React.InputHTMLAttributes<HTMLInputElement> {
   its_val?: number;
   label?: string;
   customClassName?: string;
+  showIts?: boolean;
   register?: UseFormRegister<any>;
 }
 
@@ -18,30 +19,22 @@ export const Its: React.FC<IItsProps> = ({
   label = "Индекс технического состояния (ИТС)",
   customClassName,
   register,
+  showIts = true,
   ...props
 }) => {
   // Получаем контекст формы, если он есть
   const formContext = useFormContext();
 
   // Актуальное значение: из контекста (watch) или из пропса
-  const currentItsVal = formContext
-    ? formContext.watch("its")
-    : its_val;
+  const currentItsVal = formContext ? formContext.watch("its") : its_val;
 
   // Приводим к числу (watch может вернуть строку)
-  const numericItsVal =
-    typeof currentItsVal === "string"
-      ? parseFloat(currentItsVal)
-      : currentItsVal;
+  const numericItsVal = typeof currentItsVal === "string" ? parseFloat(currentItsVal) : currentItsVal;
 
   // Определяем элемент диапазона по актуальному значению
   const range = useMemo(
-    () =>
-      ItsRange.find(
-        (item) =>
-          numericItsVal >= item.its_min && numericItsVal <= item.its_max
-      ),
-    [numericItsVal]
+    () => ItsRange.find((item) => numericItsVal >= item.its_min && numericItsVal <= item.its_max),
+    [numericItsVal],
   );
 
   const itsColorClass = range?.its_color_class;
@@ -56,26 +49,20 @@ export const Its: React.FC<IItsProps> = ({
   };
 
   return (
-    <div
-      className={`${styles["its"]} ${
-        customClassName ? styles[customClassName] : ""
-      }`}
-    >
+    <div className={`${styles["its"]} ${customClassName ? styles[customClassName] : ""}`}>
       <label className={styles["its__label"]}>{label}</label>
       <div className={styles["its__box"]}>
-        <div className={styles["its__value"]}>
-          {register ? (
-            <InputUI key={field.id} field={field} register={register} />
-          ) : (
-            <div className={styles["its__valTxt"]}>{its_val}</div>
-          )}
-        </div>
+        {showIts && (
+          <div className={styles["its__value"]}>
+            {register ? (
+              <InputUI key={field.id} field={field} register={register} />
+            ) : (
+              <div className={styles["its__valTxt"]}>{its_val}</div>
+            )}
+          </div>
+        )}
         <div className={styles["its__mark"]}>
-          <div
-            className={`${styles["its__color"]} ${
-              itsColorClass ? styles[itsColorClass] : ""
-            }`}
-          ></div>
+          <div className={`${styles["its__color"]} ${itsColorClass ? styles[itsColorClass] : ""}`}></div>
           <div className={styles["its__descr"]}>{itsDescr}</div>
         </div>
       </div>

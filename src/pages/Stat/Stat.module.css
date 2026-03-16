@@ -1,0 +1,19 @@
+.stat{
+  max-width: 1000px;
+}
+.statItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--bg-color);
+  padding: 20px 55px;
+  margin-bottom: 20px;
+}
+.label {
+  width: 60%;
+}
+.value {
+  width: 85px;
+  font-size: 68px;
+  line-height: 1;
+}

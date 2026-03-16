@@ -1,5 +1,5 @@
 import { apiClient } from './apiClient';
-import { ApiResponse, AuthResponse } from '../types/api.ts';
+import { AuthResponse } from '../types/index.ts';
 import { LoginFormData } from '../types/forms.ts';
 
 export const authApi = {
