@@ -89,6 +89,7 @@ const CarsSlice = createSlice({
     },
     clearCars: (state) => {
       state.cars = null;
+      state.isGetCars = false;
     },
     setCurrentCar: (state, action: PayloadAction<ICar>) => {
       state.car = action.payload;

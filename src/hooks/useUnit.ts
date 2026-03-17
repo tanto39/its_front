@@ -7,7 +7,8 @@ import { clearSend, fetchUnit, updateUnit, deleteUnit, setCurrentUnit, createUni
 import { unitFormData } from "../types/forms";
 import { IUnit, IMessage, IUrlParam } from "../types/index";
 import { useCars } from "./useCars";
-import { clearCurrentCar } from "../store/slices/carsSlice";
+import { clearCars, clearCurrentCar } from "../store/slices/carsSlice";
+import { clearStats } from "../store/slices/statsSlice";
 
 export function useUnit() {
   const navigate = useNavigate();
@@ -97,8 +98,9 @@ export function useUnit() {
       // Обновление существующего
       await dispatch(updateUnit({ id: unit!.unit_id, formData: formDataToSend })).unwrap();
     }
-
-    dispatch(clearCurrentCar());
+    await dispatch(clearStats());
+    await dispatch(clearCars());
+    await dispatch(clearCurrentCar());
     navigate(`/cars/${selectedCar}`);
   };
 
@@ -112,7 +114,9 @@ export function useUnit() {
           setIsDeleting(true); // блокируем дальнейшие запросы
           try {
             await dispatch(deleteUnit({ id: unit.unit_id })).unwrap();
-            dispatch(clearCurrentCar());
+            await dispatch(clearStats());
+            await dispatch(clearCars());
+            await dispatch(clearCurrentCar());
             navigate(`/cars/${unit.car_id}`);
           } catch (err) {
             console.error("Ошибка удаления:", err);

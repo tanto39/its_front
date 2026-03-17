@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/helpers";
 import { setMessage } from "../store/slices/message";
 import { clearSend, fetchCar, updateCar, deleteCar, setCurrentCar, createCar } from "../store/slices/carsSlice";
+import { clearStats } from "../store/slices/statsSlice";
 import { carFormData } from "../types/forms";
 import { ICar, IMessage, IUrlParam, IUser } from "../types/index";
 import { useUsers } from "./useUsers";
@@ -77,6 +78,7 @@ export function useCar() {
   }
 
   const onSubmit: SubmitHandler<carFormData> = async (formData) => {
+    await dispatch(clearStats());
     const formDataToSend = new FormData();
 
     // Добавляем все поля формы
@@ -113,6 +115,7 @@ export function useCar() {
         onConfirm: async () => {
           setIsDeleting(true); // блокируем дальнейшие запросы
           try {
+            await dispatch(clearStats());
             await dispatch(deleteCar({ id: car.car_id })).unwrap();
             navigate("/cars");
           } catch (err) {

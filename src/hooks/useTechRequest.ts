@@ -15,6 +15,7 @@ import { ITechRequest, IMessage, IUrlParam, IUser, RequestType } from "../types/
 import { useCars } from "./useCars";
 import { useUsers } from "./useUsers";
 import { SelectOption, techRequestForm } from "../types/forms";
+import { clearStats } from "../store/slices/statsSlice";
 
 export function useTechRequest() {
   const navigate = useNavigate();
@@ -106,8 +107,7 @@ export function useTechRequest() {
       info: formData.info || ""
     };
 
-    // Отладка: посмотреть, что отправляется
-    console.log("Request data:", requestData);
+    await dispatch(clearStats());
 
     if (techRequest?.request_id == 0) {
       const resultAction = await dispatch(createTechRequest(requestData));
@@ -131,6 +131,7 @@ export function useTechRequest() {
           setIsDeleting(true); // блокируем дальнейшие запросы
           try {
             await dispatch(deleteTechRequest({ id: techRequest.request_id })).unwrap();
+            await dispatch(clearStats());
             navigate("/tech_requests");
           } catch (err) {
             console.error("Ошибка удаления:", err);
