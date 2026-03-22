@@ -3,9 +3,9 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { IUser, UsersState } from "../../types/index";
 
 const initialState: UsersState = {
-  users: [],
+  users: null,
   optionsUsers: [],
-  user: {} as IUser,
+  user: null,
   isLoading: false,
   error: null,
   successSend: false,
@@ -138,13 +138,8 @@ const UsersSlice = createSlice({
       })
       .addCase(createUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.users.push(action.payload);
         state.user = action.payload;
         state.successSend = true;
-        state.optionsUsers.push({
-          value: state.user.login,
-          label: `${state.user.second_name} ${state.user.first_name} ${state.user.middle_name}`,
-        });
       })
       .addCase(createUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -159,13 +154,6 @@ const UsersSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
-        // Обновляем в списке
-        const index = state.users.findIndex((p) => p.login === action.payload.login);
-        state.users[index] = action.payload;
-
-        const indexOp = state.optionsUsers.findIndex((p) => p.value === action.payload.login);
-        state.optionsUsers[indexOp].label = `${state.user.second_name} ${state.user.first_name} ${state.user.middle_name}`;
-        
         state.successSend = true;
       })
       .addCase(updateUser.rejected, (state, action) => {
@@ -180,13 +168,6 @@ const UsersSlice = createSlice({
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        // Обновляем в списке
-        const index = state.users.findIndex((p) => p.login === action.payload.login);
-        state.users.splice(index, 1)
-
-        const indexOp = state.optionsUsers.findIndex((p) => p.value === action.payload.login);
-        state.optionsUsers.splice(indexOp, 1)
-
         state.successSend = true;
       })
       .addCase(deleteUser.rejected, (state, action) => {

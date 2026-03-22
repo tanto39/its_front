@@ -47,7 +47,7 @@ a {
 }
 .heading {
   color: #282828;
-  font: 500 42px/1.8 Roboto, Montserrat, Helvetica, sans-serif;
+  font: 500 38px/1.8 Roboto, Montserrat, Helvetica, sans-serif;
   margin: 30px 30px 10px 0;
 }
 input:focus, textarea:focus {

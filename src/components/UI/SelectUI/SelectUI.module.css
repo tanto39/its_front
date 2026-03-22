@@ -11,6 +11,7 @@
   position: relative;
   user-select: none;
   margin: 5px 0 16px 0;
+  max-width: 500px;
 }
 
 .selectHeader {

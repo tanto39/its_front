@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../store/helpers";
 import { fetchUsers } from "../store/slices/usersSlice";
 import { setMessage } from "../store/slices/message";
 import { IMessage } from "../types/index";
+import { useFilterUsers } from "./useFilterUsers";
 
 export function useUsers() {
   const { users, optionsUsers, isLoading, error } = useAppSelector((state) => state.users);
@@ -10,7 +11,7 @@ export function useUsers() {
    const messageSet: IMessage = {} as IMessage;
 
   useEffect(() => {
-    if (users.length === 0) {
+    if (!users) {
       dispatch(fetchUsers());
     }
   }, [dispatch, users]);
@@ -22,5 +23,7 @@ export function useUsers() {
     dispatch(setMessage(messageSet));
   }
 
-  return { users, optionsUsers, isLoading, error };
+  const filteredSortedUsers = useFilterUsers(users);
+
+  return { users, filteredSortedUsers, optionsUsers, isLoading, error };
 }

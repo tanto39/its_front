@@ -8,6 +8,7 @@ import FilterSlice from './slices/filterSlice';
 import TechRequestSlice from './slices/techRequestSlice';
 import FilterTechRequestSlice from './slices/filterTechRequestSlice';
 import StatsSlice from './slices/statsSlice';
+import FilterUsersSlice from './slices/filterUsersSlice';
 
 const rootReducer = combineReducers({
     auth: authSlice,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     filter: FilterSlice,
     techRequest: TechRequestSlice,
     filterTechRequest: FilterTechRequestSlice,
-    stats: StatsSlice
+    stats: StatsSlice,
+    filterUsers: FilterUsersSlice
 });
 
 const store = configureStore({

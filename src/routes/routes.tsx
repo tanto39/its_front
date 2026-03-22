@@ -8,6 +8,8 @@ import TechRequests from '../pages/TechRequests/TechRequests';
 import TechRequest from '../pages/TechRequest/TechRequest';
 import Stat from '../pages/Stat/Stat';
 import Page404 from '../pages/Page404/Page404';
+import Users from '../pages/Users/Users';
+import User from '../pages/User/User';
 
 
 export const publicRoutes: RouteObject[] = [
@@ -23,6 +25,8 @@ export const privateRoutes: RouteObject[] = [
   { path: '/tech_requests', element: <TechRequests /> },
   { path: '/tech_requests/:id', element: <TechRequest /> },
   { path: '/stat', element: <Stat /> },
+  { path: '/users', element: <Users /> },
+  { path: '/users/:id', element: <User /> },
   { path: '/404', element: <Page404 /> },
   { path: "*", element: <Navigate replace to="/404" /> },
 ];

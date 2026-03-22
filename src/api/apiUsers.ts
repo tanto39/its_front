@@ -15,7 +15,7 @@ export const ApiUsers = {
   },
 
   updateUser: async (login: string, data: Partial<IUser>): Promise<IUser> => {
-    return apiClient.put<IUser>(`/Useres/${login}`, data);
+    return apiClient.put<IUser>(`/users/${login}`, data);
   },
 
   deleteUser: async (login: string): Promise<IUser> => {

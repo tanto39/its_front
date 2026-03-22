@@ -45,6 +45,15 @@ export interface techRequestForm {
   person: string;
 }
 
+export interface userForm {
+  login: string;
+  second_name: string;
+  first_name: string;
+  middle_name: string;
+  role_name: string;
+  password: string;
+}
+
 export interface unitFormData {
   unit_id: number,
   name: string,

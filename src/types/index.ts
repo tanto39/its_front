@@ -71,7 +71,7 @@ export interface AuthState {
 }
 
 export interface UsersState {
-  users: IUser[];
+  users: IUser[] | null;
   optionsUsers: SelectOption[];
   user: IUser | null;
   isLoading: boolean;
@@ -121,6 +121,11 @@ export interface FilterTechRequestState {
   date_repair: string,
   person: string;
   sort: 'name_asc' | 'name_desc' | 'date_repair_asc' | 'date_repair_desc';
+}
+
+export interface FilterUsersState {
+  person: string;
+  sort: 'name_asc' | 'name_desc' | 'login_asc' | 'login_desc';
 }
 
 export interface StatsState {
