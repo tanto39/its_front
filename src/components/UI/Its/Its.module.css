@@ -33,6 +33,7 @@
 
 .its__mark {
   display: flex;
+  font-size: 22px;
   align-items: center;
   height: 57px;
   gap: 16px;
@@ -49,7 +50,7 @@
   background-color: #ccc;
 }
 .itsSmall .its__color {
-    width: 32px;
+  width: 32px;
 }
 
 /* Цветовые классы для диапазонов */
@@ -66,4 +67,11 @@
 }
 
 @media (max-width: 991px) {
+  .its__label {
+    font-size: 18px;
+  }
+  .its__box {
+  gap: 10px;
+  margin: 3px 0;
+}
 }

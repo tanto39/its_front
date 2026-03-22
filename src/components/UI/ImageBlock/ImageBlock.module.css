@@ -52,3 +52,9 @@
 .fileInput::file-selector-button:hover {
   background-color: var(--bg-gray);
 }
+
+@media (max-width: 991px) {
+  .imageBlock {
+    width: 100%;
+  }
+}

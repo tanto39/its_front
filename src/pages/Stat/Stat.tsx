@@ -18,31 +18,43 @@ const Stat: React.FC = () => {
           <div className={styles.stat}>
             <div className={styles.statItem}>
               <span className={styles.label}>Индекс технического состояния (ИТС) автопарка </span>
-              <span className={styles.value}>{stats.avgIts}</span>
-              <Its its_val={stats.avgIts} label="" showIts={false} />
+              <div className={styles.valueWrap}>
+                <span className={styles.value}>{stats.avgIts}</span>
+                <Its its_val={stats.avgIts} label="" showIts={false} />
+              </div>
             </div>
             <div className={styles.statItem}>
               <span className={styles.label}>Количество автомобилей в автопарке</span>
-              <span className={styles.value}>{stats.totalCars}</span>
+              <div className={styles.valueWrap}>
+                <span className={styles.value}>{stats.totalCars}</span>
+              </div>
             </div>
             <div className={styles.statItem}>
               <span className={styles.label}>Количество автомобилей с ИТС 70-100</span>
-              <span className={styles.value}>{stats.count70_100}</span>
-              <Its its_val={80} label="" showIts={false} />
+              <div className={styles.valueWrap}>
+                <span className={styles.value}>{stats.count70_100}</span>
+                <Its its_val={80} label="" showIts={false} />
+              </div>
             </div>
             <div className={styles.statItem}>
               <span className={styles.label}>Количество автомобилей с ИТС 30-69</span>
-              <span className={styles.value}>{stats.count30_69}</span>
-              <Its its_val={40} label="" showIts={false} />
+              <div className={styles.valueWrap}>
+                <span className={styles.value}>{stats.count30_69}</span>
+                <Its its_val={40} label="" showIts={false} />
+              </div>
             </div>
             <div className={styles.statItem}>
               <span className={styles.label}>Количество автомобилей с ИТС 0-29</span>
-              <span className={styles.value}>{stats.count0_29}</span>
-              <Its its_val={0} label="" showIts={false} />
+              <div className={styles.valueWrap}>
+                <span className={styles.value}>{stats.count0_29}</span>
+                <Its its_val={0} label="" showIts={false} />
+              </div>
             </div>
             <div className={styles.statItem}>
               <span className={styles.label}>Количество заявок на ТО и ремонт</span>
-              <span className={styles.value}>{stats.totalRequests}</span>
+              <div className={styles.valueWrap}>
+                <span className={styles.value}>{stats.totalRequests}</span>
+              </div>
             </div>
           </div>
         </div>

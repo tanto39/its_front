@@ -18,3 +18,16 @@
   display: flex;
   gap: 20px;
 }
+
+@media (max-width: 991px) {
+  .form {
+    width: 100%;
+    order: 2;
+  }
+  .buttonsBottom {
+    margin: 0;
+  }
+  .saveButton {
+    width: auto;
+  }
+}

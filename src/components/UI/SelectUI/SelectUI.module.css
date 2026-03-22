@@ -4,7 +4,11 @@
 }
 
 .label {
-  font: 300 22px / 26px Roboto, Montserrat, Helvetica, sans-serif;
+  font:
+    300 22px / 26px Roboto,
+    Montserrat,
+    Helvetica,
+    sans-serif;
 }
 
 .container {
@@ -128,4 +132,16 @@
 
 .disabled .selectHeader:hover {
   border-color: #ddd;
+}
+
+@media (max-width: 991px) {
+  .label {
+    font-size: 18px;
+  }
+  .container {
+    margin: 0 0 10px 0;
+  }
+  .selectHeader {
+    padding: 19px 20px;
+  }
 }

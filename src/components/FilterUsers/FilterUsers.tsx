@@ -39,8 +39,8 @@ const FilterUsers: React.FC = () => {
   };
 
   return (
-    <div className={styles.filter}>
-      <div className={styles.filterRow}>
+    <div className='filter'>
+      <div className={`filterRow ${styles.filterRow}`}>
         <InputUI field={personField} value={filters.person} onChange={handlePersonChange} />
         <SelectUI
           options={sortOptions}

@@ -91,13 +91,13 @@ const Filter: React.FC = () => {
   };
 
   return (
-    <div className={styles.filter}>
-      <div className={styles.filterRow}>
+    <div className='filter'>
+      <div className={`filterRow ${styles.filterRow}`}>
         <InputUI field={nameField} value={filters.name} onChange={handleNameChange} />
         <InputUI field={regNumberField} value={filters.reg_number} onChange={handleRegNumberChange} />
         <InputUI field={carIdField} value={filters.car_id} onChange={handleCarIdChange} />
       </div>
-      <div className={styles.filterRow}>
+      <div className={`filterRow ${styles.filterRow}`}>
         <InputUI field={personField} value={filters.person} onChange={handlePersonChange} />
         <SelectUI
           options={itsOptions}

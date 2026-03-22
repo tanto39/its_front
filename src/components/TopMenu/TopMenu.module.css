@@ -150,7 +150,7 @@
   }
 }
 
-@media (max-width: 979px) {
+@media (max-width: 991px) {
   .links {
     flex-direction: column;
   }

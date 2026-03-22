@@ -90,13 +90,13 @@ const FilterTechRequest: React.FC = () => {
   };
 
   return (
-    <div className={styles.filter}>
-      <div className={styles.filterRow}>
+    <div className='filter'>
+      <div className={`filterRow ${styles.filterRow}`}>
         <InputUI field={requestIdField} value={filters.request_id} onChange={handleRequestIdChange} />
         <InputUI field={carIdField} value={filters.car_id} onChange={handleCarIdChange} />
         <InputUI field={dateRepairField} value={filters.date_repair} onChange={handleDateRepairChange} />
       </div>
-      <div className={styles.filterRow}>
+      <div className={`filterRow ${styles.filterRow}`}>
         <InputUI field={personField} value={filters.person} onChange={handlePersonChange} />
         <SelectUI
           options={requestTypeOptions}

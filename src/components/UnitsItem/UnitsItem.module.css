@@ -23,6 +23,9 @@
 }
 .name {
   font-size: 1.5rem;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 10px;
 }
 .its {
   display: flex;
@@ -31,4 +34,16 @@
 .label {
   font-size: 32px;
   line-height: 1;
+}
+
+@media (max-width: 1250px) {
+  .unit {
+    width: 26%;
+  }
+}
+
+@media (max-width: 991px) {
+  .unit {
+    width: auto;
+  }
 }

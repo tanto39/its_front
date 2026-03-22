@@ -21,3 +21,10 @@
   background-color: var(--block-color);
   color: var(--blue-color);
 }
+
+@media (max-width: 991px) {
+  .btnUI {
+    font-size: 20px;
+    width: auto;
+  }
+}

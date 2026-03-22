@@ -37,9 +37,31 @@
 .car__nums {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }
-.car__uid, .car__regnum, .car__person {
+.car__uid,
+.car__regnum,
+.car__person {
   border: 2px solid var(--border-color);
   border-radius: 10px;
   padding: 5px 20px;
+}
+
+@media (max-width: 1200px) {
+  .car__info {
+    font-size: 18px;
+  }
+  .car__title {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 991px) {
+  .car, .car__nums {
+    flex-direction: column;
+  }
+  .car__img {width: 100%;}
+  .car__its {
+    margin: 20px auto;
+  }
 }

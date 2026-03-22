@@ -25,7 +25,17 @@
   width: 80px;
 }
 @media (max-width: 991px) {
-  .inputField {
-    padding: 16px 20px;
+  .inputUI__field {
+    padding: 16px;
+  }
+  .inputUI__field, .inputUI__label {
+    font-size: 18px;
+    margin-bottom: 0;
+  }
+  .inputUI__field {
+    margin: 0 0 10px 0;
+  }
+  .inputUI__date{
+    width: 80%;
   }
 }
