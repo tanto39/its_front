@@ -48,7 +48,7 @@ const LoginPage: React.FC = () => {
   ];
 
   return (
-    <main className={styles.loginPageWrap}>
+    <div className={styles.loginPageWrap}>
       <form className={styles.loginForm}>
         <div className={styles.formInputs}>
           {inputFields.map((field) => (
@@ -64,7 +64,7 @@ const LoginPage: React.FC = () => {
       </form>
       {isLoading && <Loader />}
       {error && <ErrorBlock error={error} />}
-    </main>
+    </div>
   );
 };
 

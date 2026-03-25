@@ -20,7 +20,8 @@ const User: React.FC = () => {
     handleSubmit,
     selectedRole,
     setSelectedRole,
-    optionsRole
+    optionsRole,
+    paramsId,
   } = useUser();
 
   return (
@@ -40,7 +41,10 @@ const User: React.FC = () => {
                   field={{
                     ...field,
                     disabled:
-                      currentUser.role_name !== "admin" && user.login !== currentUser.login ? true : field.disabled,
+                      (field.id === "login" && paramsId !== "0") ||
+                      (currentUser.role_name !== "admin" && user.login !== currentUser.login)
+                        ? true
+                        : field.disabled,
                   }}
                   register={register}
                 />

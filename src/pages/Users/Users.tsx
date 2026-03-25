@@ -19,7 +19,7 @@ const Users: React.FC = () => {
       {isLoading && <Loader />}
       {error && <ErrorBlock error={error} />}
       <div className={styles.add}>
-        <ButtonUI type="button" onClick={() => navigate('/user/0')}>
+        <ButtonUI type="button" onClick={() => navigate('/users/0')}>
           Создать пользователя
         </ButtonUI>
       </div>

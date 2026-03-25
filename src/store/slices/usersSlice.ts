@@ -139,6 +139,7 @@ const UsersSlice = createSlice({
       .addCase(createUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
+        state.users = null;
         state.successSend = true;
       })
       .addCase(createUser.rejected, (state, action) => {
@@ -154,6 +155,7 @@ const UsersSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
+        state.users = null;
         state.successSend = true;
       })
       .addCase(updateUser.rejected, (state, action) => {
@@ -168,6 +170,7 @@ const UsersSlice = createSlice({
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.users = null;
         state.successSend = true;
       })
       .addCase(deleteUser.rejected, (state, action) => {

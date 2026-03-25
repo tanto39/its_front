@@ -6,7 +6,6 @@ export const inputFields: IInputField[] = [
     type: "text",
     label: "Логин",
     placeholder: "Введите логин",
-    disabled: true
   },
   {
     id: "second_name",

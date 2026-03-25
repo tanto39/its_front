@@ -31,11 +31,11 @@ export function useUser() {
   useEffect(() => {
     if (isDeleting) return;
 
-    const login: string = params.id || "";
-    if (login === "") {
+    const login: string = params.id || "0";
+    if (login === "0") {
       // Если пользователь ещё не создан или его login не задан
-      if (!user || !user.login) {
-        dispatch(setCurrentUser({ login: "" } as IUser));
+      if (!user) {
+        dispatch(setCurrentUser({ login: "Новый" } as IUser));
       }
     } else if (!user || user.login !== login) {
       dispatch(fetchUser(login));
@@ -70,7 +70,7 @@ export function useUser() {
   const onSubmit: SubmitHandler<userForm> = async (formData) => {
     // Создаем объект данных для отправки в формате JSON
     const requestData: IUser = {
-      login: user?.login || "",
+      login: formData.login || "",
       second_name: formData.second_name || "",
       first_name: formData.first_name || "",
       middle_name: formData.middle_name || "",
@@ -78,7 +78,7 @@ export function useUser() {
       password: formData.password || "",
     };
 
-    if (!user || !user.login) {
+    if (!user || params.id == "0") {
       const resultAction = await dispatch(createUser(requestData));
       // Проверяем, что действие выполнилось успешно
       if (createUser.fulfilled.match(resultAction)) {
@@ -122,6 +122,7 @@ export function useUser() {
     handleSubmit,
     selectedRole,
     setSelectedRole,
-    optionsRole
+    optionsRole,
+    paramsId: params.id,
   };
 }

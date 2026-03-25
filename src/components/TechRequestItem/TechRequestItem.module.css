@@ -29,3 +29,19 @@
 .request__text {
 
 }
+@media (max-width: 1100px) {
+  .request {
+    width: 40%;
+  }
+}
+
+@media (max-width: 991px) {
+  .request {
+    width: 93%;
+    padding: 20px 15px;
+    margin-bottom: 20px;
+  }
+  .request__title {
+    font-size: 26px;
+  }
+}

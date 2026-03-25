@@ -1,8 +1,9 @@
 .loginPageWrap{
-  
+  padding: 15px;
+  margin: 0 auto;
 }
 .loginForm{
-  width: 600px;
+  max-width: 600px;
   margin: 5rem auto;
   border: 4px solid var(--border-color);
   border-radius: 60px;
@@ -15,4 +16,11 @@
 .buttonsContainer{
   display: flex;
   justify-content: space-around;
+}
+
+@media (max-width: 991px) {
+  .loginForm{
+    border-radius: 15px;
+    padding: 20px;
+  }
 }
