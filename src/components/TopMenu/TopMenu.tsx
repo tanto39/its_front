@@ -1,35 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store/helpers";
-import { logout } from "../../store/slices/authSlice";
 import { UserRole } from "../../types/index";
 import { navLinks } from "./NavLinks";
 import styles from "./TopMenu.module.css";
+import { useMenu } from "../../hooks/useMenu";
 
 export const TopMenu: React.FC = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.auth);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Закрытие меню при изменении размера окна (чтобы после поворота экрана меню не оставалось открытым)
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 980) {
-        setIsMenuOpen(false);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const handleLogout = async () => {
-    dispatch(logout());
-    setIsMenuOpen(false); // закрыть меню после выхода
-  };
-
-  const closeMenu = () => setIsMenuOpen(false);
+  const { handleLogout, closeMenu, setIsMenuOpen, user, isMenuOpen } = useMenu();
 
   // Рендер содержимого меню (ссылки и кнопка выхода)
   const renderMenuContent = () => (

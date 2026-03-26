@@ -32,7 +32,7 @@ const TechRequestItem: React.FC<TechRequestItemProps> = ({ techRequest }) => {
       <div className={styles.request__info}>
         <img className={styles.request__img} src="/public/images/today.svg" alt="Дата" />
         <span className={styles.request__text}>
-          {techRequest.date_repair}
+          {new Date(techRequest.date_repair).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' })}
         </span>
       </div>
     </div>

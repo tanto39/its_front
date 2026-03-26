@@ -3,7 +3,7 @@
   border: 2px solid var(--border-color);
   border-radius: 30px;
   padding: 32px;
-  gap: 5%;
+  gap: 4%;
   cursor: pointer;
   margin-bottom: 20px;
   background: var(--block-color);
