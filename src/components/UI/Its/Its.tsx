@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styles from "./Its.module.css";
 import { UseFormRegister } from "react-hook-form";
 import { IInputField } from "../../../types/forms";
@@ -19,7 +19,6 @@ export const Its: React.FC<IItsProps> = ({
   customClassName,
   register,
   showIts = true,
-  ...props
 }) => {
   const{ itsColorClass, itsDescr} = useIts({its_val});
 

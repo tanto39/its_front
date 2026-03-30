@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/helpers";
@@ -11,7 +11,7 @@ import {
   setCurrentTechRequest,
   createTechRequest,
 } from "../store/slices/techRequestSlice";
-import { ITechRequest, IMessage, IUrlParam, IUser, RequestType } from "../types/index";
+import { ITechRequest, IMessage, IUrlParam, RequestType } from "../types/index";
 import { useCars } from "./useCars";
 import { useUsers } from "./useUsers";
 import { SelectOption, techRequestForm } from "../types/forms";
@@ -34,7 +34,7 @@ export function useTechRequest() {
 
   const params = useParams<IUrlParam>();
 
-  const { register, handleSubmit, getValues, setValue, watch } = useForm<techRequestForm>();
+  const { register, handleSubmit, setValue, watch } = useForm<techRequestForm>();
 
   // Получаем значение car_id из формы
   const watchCar = watch("car_id");

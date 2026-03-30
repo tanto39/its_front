@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/helpers";
@@ -6,7 +6,7 @@ import { setMessage } from "../store/slices/message";
 import { clearSend, fetchCar, updateCar, deleteCar, setCurrentCar, createCar } from "../store/slices/carsSlice";
 import { clearStats } from "../store/slices/statsSlice";
 import { carFormData } from "../types/forms";
-import { ICar, IMessage, IUrlParam, IUser } from "../types/index";
+import { ICar, IMessage, IUrlParam } from "../types/index";
 import { useUsers } from "./useUsers";
 
 export function useCar() {
@@ -20,7 +20,7 @@ export function useCar() {
 
   const params = useParams<IUrlParam>();
 
-  const { register, handleSubmit, getValues, setValue, watch } = useForm<carFormData>();
+  const { register, handleSubmit, setValue, watch } = useForm<carFormData>();
 
   // Получаем значение id_medical_profile из формы
   const watchPerson = watch("person");

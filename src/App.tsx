@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import { TopMenu } from "./components/TopMenu/TopMenu";
 import { Footer } from "./components/Footer/Footer";
@@ -9,7 +8,7 @@ import { useAppSelector } from "./store/helpers";
 import Loader from "./components/UI/Loader/Loader";
 
 function App() {
-  const { user, token, isLoading, error } = useAppSelector((state) => state.auth);
+  const { user, isLoading } = useAppSelector((state) => state.auth);
 
   return (
     <BrowserRouter>

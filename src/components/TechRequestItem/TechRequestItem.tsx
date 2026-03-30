@@ -2,6 +2,10 @@ import React from "react";
 import styles from "./TechRequestItem.module.css";
 import { ITechRequest } from "../../types";
 import { useNavigate } from "react-router-dom";
+import span from '../../assets/images/span.svg';
+import car from '../../assets/images/car.svg';
+import today from '../../assets/images/today.svg';
+import person from '../../assets/images/person.svg';
 
 interface TechRequestItemProps {
   techRequest: ITechRequest;
@@ -14,23 +18,23 @@ const TechRequestItem: React.FC<TechRequestItemProps> = ({ techRequest }) => {
     <div className={styles.request} onClick={() => navigate(`/tech_requests/${techRequest.request_id}`)}>
       <h3 className={styles.request__title}>Заявка №{techRequest.request_id}</h3>
       <div className={styles.request__info}>
-        <img className={styles.request__img} src="/public/images/span.svg" alt="Тип" />
+        <img className={styles.request__img} src={span} alt="Тип" />
         <span className={styles.request__text}>{techRequest.request_type === "to" ? "ТО" : "Ремонт"}</span>
       </div>
       <div className={styles.request__info}>
-        <img className={styles.request__img} src="/public/images/car.svg" alt="Автомобиль" />
+        <img className={styles.request__img} src={car} alt="Автомобиль" />
         <span className={styles.request__text}>
           {techRequest.car?.name} {techRequest.car_id}
         </span>
       </div>
       <div className={styles.request__info}>
-        <img className={styles.request__img} src="/public/images/person.svg" alt="Ответственное лицо" />
+        <img className={styles.request__img} src={person} alt="Ответственное лицо" />
         <span className={styles.request__text}>
           {techRequest.person?.second_name} {techRequest.person?.first_name} {techRequest.person?.middle_name}
         </span>
       </div>
       <div className={styles.request__info}>
-        <img className={styles.request__img} src="/public/images/today.svg" alt="Дата" />
+        <img className={styles.request__img} src={today} alt="Дата" />
         <span className={styles.request__text}>
           {new Date(techRequest.date_repair).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' })}
         </span>

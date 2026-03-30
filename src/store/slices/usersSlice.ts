@@ -168,7 +168,7 @@ const UsersSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(deleteUser.fulfilled, (state, action) => {
+      .addCase(deleteUser.fulfilled, (state) => {
         state.isLoading = false;
         state.users = null;
         state.successSend = true;

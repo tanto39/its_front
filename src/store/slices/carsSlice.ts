@@ -177,7 +177,7 @@ const CarsSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(deleteCar.fulfilled, (state, action) => {
+      .addCase(deleteCar.fulfilled, (state) => {
         state.isLoading = false;
         state.cars = null;
         state.isGetCars = false;

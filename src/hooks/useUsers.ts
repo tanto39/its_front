@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/helpers";
 import { fetchUsers } from "../store/slices/usersSlice";
 import { setMessage } from "../store/slices/message";

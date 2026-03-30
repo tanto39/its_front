@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo, KeyboardEvent } from "react";
+import React from "react";
 import { SelectOption } from "../../../types/forms";
 import styles from "./SelectUI.module.css";
 import { useSelect } from "../../../hooks/useSelect";

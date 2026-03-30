@@ -133,7 +133,7 @@ const UnitSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(deleteUnit.fulfilled, (state, action) => {
+      .addCase(deleteUnit.fulfilled, (state) => {
         state.isLoading = false;
         state.unit = null;
       })

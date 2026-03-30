@@ -9,7 +9,6 @@ import SelectUI from "../../components/UI/SelectUI/SelectUI";
 import { Its } from "../../components/UI/Its/Its";
 import ImageBlock from "../../components/UI/ImageBlock/ImageBlock";
 import { useUnit } from "../../hooks/useUnit";
-import { useAppSelector } from "../../store/helpers";
 import { FormProvider } from "react-hook-form";
 
 const Unit: React.FC = () => {

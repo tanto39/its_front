@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/helpers";
@@ -23,7 +23,7 @@ export function useUnit() {
   const params = useParams<IUrlParam>();
 
   const formMethods = useForm<unitFormData>();
-  const { register, handleSubmit, getValues, setValue, watch } = formMethods;
+  const { setValue, watch } = formMethods;
 
   // Получаем значение car_id из формы
   const watchCar = watch("car_id");

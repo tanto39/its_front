@@ -1,4 +1,3 @@
-import React from "react";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "../helpers";
 import { IMessage, IMessageSlice } from "../../types/index";

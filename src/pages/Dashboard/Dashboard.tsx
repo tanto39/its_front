@@ -15,7 +15,7 @@ const Dashboard: React.FC = () => {
         {user &&
           boardLinks
             .filter((board) => board.roles.includes(user.role_name as UserRole))
-            .map((board, index) => {
+            .map((board) => {
               return <DashboardItem key={board.title} item={board} />;
             })}
       </div>

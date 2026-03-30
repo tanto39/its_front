@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { apiStats } from "../../api/apiStats.ts";
-import { IStats, StatsState } from "../../types/index";
+import { StatsState } from "../../types/index";
 
 const initialState: StatsState = {
   stats: null,

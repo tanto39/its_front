@@ -1,5 +1,3 @@
-import { RequestType, UserRole } from "./index.ts";
-
 // Типы для форм
 export interface IInputField {
   id: string;

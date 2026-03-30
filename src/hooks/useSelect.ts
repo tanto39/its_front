@@ -9,7 +9,7 @@ interface UseSelectProps {
   className?: string;
 }
 
-export const useSelect = ({ options, value, onChange, disabled = false, className = "" }: UseSelectProps) => {
+export const useSelect = ({ options, value, onChange, disabled = false }: UseSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [highlightedIndex, setHighlightedIndex] = useState(-1);

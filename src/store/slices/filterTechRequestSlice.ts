@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FilterTechRequestState, IUser } from '../../types';
+import { FilterTechRequestState } from '../../types';
 
 const initialState: FilterTechRequestState = {
   request_id: '',

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/helpers";
 import { setMessage } from "../store/slices/message";
 import { clearSend, fetchUser, updateUser, deleteUser, setCurrentUser, createUser } from "../store/slices/usersSlice";
-import { IUser, IMessage, IUrlParam, RequestType, UserRole } from "../types/index";
+import { IUser, IMessage, IUrlParam, UserRole } from "../types/index";
 import { SelectOption, userForm } from "../types/forms";
 
 export function useUser() {
@@ -17,7 +17,7 @@ export function useUser() {
 
   const params = useParams<IUrlParam>();
 
-  const { register, handleSubmit, getValues, setValue, watch } = useForm<userForm>();
+  const { register, handleSubmit, setValue, watch } = useForm<userForm>();
 
   const optionsRole: SelectOption[] = [
     { label: "Пользователь", value: "user" },

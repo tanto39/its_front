@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/helpers";
 import { setMessage } from "../store/slices/message.ts";
 import { useForm } from "react-hook-form";

@@ -4,6 +4,7 @@ import { UserRole } from "../../types/index";
 import { navLinks } from "./NavLinks";
 import styles from "./TopMenu.module.css";
 import { useMenu } from "../../hooks/useMenu";
+import exit from '../../assets/images/exit.svg';
 
 export const TopMenu: React.FC = () => {
   const { handleLogout, closeMenu, setIsMenuOpen, user, isMenuOpen } = useMenu();
@@ -22,7 +23,7 @@ export const TopMenu: React.FC = () => {
             ))}
       </div>
       <div className={styles.exit} onClick={handleLogout}>
-        <img src="/public/images/exit.svg" alt="Выйти" title="Выйти" />
+        <img src={exit} alt="Выйти" title="Выйти" />
       </div>
     </>
   );

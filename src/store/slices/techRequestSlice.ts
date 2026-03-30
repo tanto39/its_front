@@ -178,7 +178,7 @@ const TechRequestSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(deleteTechRequest.fulfilled, (state, action) => {
+      .addCase(deleteTechRequest.fulfilled, (state) => {
         state.isLoading = false;
         state.techRequests = null;
         state.isGetTechRequests = false;
