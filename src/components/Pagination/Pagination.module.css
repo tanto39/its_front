@@ -1,0 +1,30 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.page, .arrow {
+  padding: 0.2rem 1rem;
+  background: var(--menu-color);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s;
+  color: #fff;
+}
+
+.page, .arrow, .page:hover, .arrow:hover, .page:focus, .arrow:focus, .page:active, .arrow:active {
+  border: 1px solid var(--border-color);
+  outline: none;
+}
+
+.page.active, .arrow:disabled, .page:hover, .arrow:hover:not(:disabled) {
+  background-color: var(--block-color);
+  color: #000;
+}
+
+.arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

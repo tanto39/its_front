@@ -7,10 +7,14 @@ import { useTechRequests } from "../../hooks/useTechRequests";
 import ButtonUI from "../../components/UI/ButtonUI/ButtonUI";
 import { useNavigate } from "react-router-dom";
 import FilterTechRequest from "../../components/FilterTechRequest/FilterTechRequest";
+import Pagination from "../../components/Pagination/Pagination";
+import { usePaginate } from "../../hooks/usePaginate";
 
 const TechRequests: React.FC = () => {
   const navigate = useNavigate();
   const { filteredSortedTechRequests, isLoading, error } = useTechRequests();
+
+  const { paginatedData, totalPages, currentPage, goToPage } = usePaginate(filteredSortedTechRequests || []);
 
   return (
     <main className="pageWrap">
@@ -19,15 +23,16 @@ const TechRequests: React.FC = () => {
       {isLoading && <Loader />}
       {error && <ErrorBlock error={error} />}
       <div className={styles.add}>
-        <ButtonUI type="button" onClick={() => navigate('/tech_requests/0')}>
+        <ButtonUI type="button" onClick={() => navigate("/tech_requests/0")}>
           Создать заявку
         </ButtonUI>
       </div>
       <div className={styles.techRequests}>
-        {filteredSortedTechRequests?.map((techRequest) => (
+        {paginatedData.map((techRequest) => (
           <TechRequestItem key={techRequest.request_id} techRequest={techRequest} />
         ))}
       </div>
+      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
     </main>
   );
 };

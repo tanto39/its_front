@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ImageBlock.module.css";
 import { useImage } from "../../../hooks/useImage";
+import noimage from "../../../assets/images/noimage.jpg";
 
 interface ImageBlockProps {
   imageUrl?: string | null;
@@ -18,7 +19,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({ imageUrl, onFileSelect, classNa
           <img src={previewUrl} alt="Предпросмотр" className={styles.preview} />
         </div>
       ) : (
-        <img src='/public/images/no-image.jpg' alt="Предпросмотр" className={styles.preview} />
+        <img src={noimage} alt="Предпросмотр" className={styles.preview} />
       )}
       <input type="file" accept="image/*" onChange={handleFileChange} ref={fileInputRef} className={styles.fileInput} />
     </div>

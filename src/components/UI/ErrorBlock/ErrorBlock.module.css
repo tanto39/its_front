@@ -1,5 +1,5 @@
 .error {
-  margin: 16px 0;
+  margin: 16px;
   padding: 16px;
   background: var(--light-red);
   border-radius: 12px;
