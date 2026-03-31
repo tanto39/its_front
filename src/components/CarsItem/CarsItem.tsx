@@ -4,6 +4,7 @@ import { ICar } from "../../types";
 import { BASE_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import { Its } from "../UI/Its/Its";
+import noimage from "../../assets/images/noimage.jpg";
 
 interface carsItemProps {
   car: ICar;
@@ -14,7 +15,12 @@ const CarsItem: React.FC<carsItemProps> = ({ car }) => {
 
   return (
     <div className={styles.car} onClick={() => navigate(`/cars/${car.car_id}`)}>
-      <img className={styles.car__img} src={BASE_URL + car.image_url} alt={car.name} title={car.name} />
+      {car.image_url ? (
+        <img className={styles.car__img} src={BASE_URL + car.image_url} alt={car.name} title={car.name} />
+      ) : (
+        <img src={noimage} alt="Нет фото" className={styles.car__img} title="Нет фото"/>
+      )}
+      
       <div className={styles.car__info}>
         <h3 className={styles.car__title}>{car.name}</h3>
         <div className={styles.car__nums}>

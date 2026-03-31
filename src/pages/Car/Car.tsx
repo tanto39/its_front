@@ -82,7 +82,11 @@ const Car: React.FC = () => {
               )}
             </form>
 
-            <ImageBlock imageUrl={car.image_url} onFileSelect={handleFileSelect} />
+            { car.image_url ? (
+              <ImageBlock imageUrl={car.image_url} onFileSelect={handleFileSelect} />
+            ) : (
+              <ImageBlock onFileSelect={handleFileSelect} />
+            )}
           </div>
 
           {car.units && <Units units={car.units} />}

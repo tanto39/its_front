@@ -4,6 +4,7 @@ import { IUnit } from "../../types";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../constants";
 import { Its } from "../UI/Its/Its";
+import noimage from "../../assets/images/noimage.jpg";
 
 interface UnitProps {
   unit: IUnit;
@@ -21,7 +22,12 @@ export const UnitsItem: React.FC<UnitProps> = ({ unit }) => {
           <Its its_val={unit.its} label="" customClassName="itsSmall" />
         </div>
       </div>
-      <img className={styles.image} src={BASE_URL + unit.image_url} alt={unit.name} title={unit.name} />
+      {unit.image_url ? (
+        <img className={styles.image} src={BASE_URL + unit.image_url} alt={unit.name} title={unit.name} />
+      ) : (
+        <img src={noimage} alt="Нет фото" className={styles.image} title="Нет фото"/>
+      )}
+
     </div>
   );
 };

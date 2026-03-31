@@ -79,7 +79,11 @@ const Unit: React.FC = () => {
               )}
             </form>
 
-            <ImageBlock imageUrl={unit.image_url} onFileSelect={handleFileSelect} />
+            {unit.image_url ? (
+              <ImageBlock imageUrl={unit.image_url} onFileSelect={handleFileSelect} />
+            ) : (
+              <ImageBlock onFileSelect={handleFileSelect} />
+            )}
           </div>
         </div>
       )}
