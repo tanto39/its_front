@@ -22,7 +22,7 @@ export const Units: React.FC<UnitsProps> = ({ units }) => {
       </div>
       <div className={styles.units}>
         {units.map((unit) => (
-          <UnitsItem unit={unit} />
+          <UnitsItem unit={unit} key={unit.unit_id} />
         ))}
       </div>
     </div>

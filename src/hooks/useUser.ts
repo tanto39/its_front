@@ -17,14 +17,19 @@ export function useUser() {
 
   const params = useParams<IUrlParam>();
 
-  const { register, handleSubmit, setValue, watch } = useForm<userForm>();
+  const { register, handleSubmit, setValue, watch, formState } = useForm<userForm>({
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
 
   const optionsRole: SelectOption[] = [
     { label: "Пользователь", value: "user" },
     { label: "Администратор", value: "admin" },
   ];
 
-  const [selectedRole, setSelectedRole] = useState<string | number>(watch("role_name") || user?.role_name || "user");
+  const watchRole = watch("role_name");
+
+  const [selectedRole, setSelectedRole] = useState<string | number>(watchRole || user?.role_name || "user");
 
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -47,8 +52,10 @@ export function useUser() {
       if (user.middle_name) {
         setValue("middle_name", user.middle_name);
       }
-      setValue("role_name", user.role_name);
-      setSelectedRole(user.role_name);
+      if (user.role_name) {
+        setValue("role_name", user.role_name);
+        setSelectedRole(user.role_name);
+      }
     }
   }, [dispatch, user, setValue, params.id, isDeleting]);
 
@@ -124,5 +131,6 @@ export function useUser() {
     setSelectedRole,
     optionsRole,
     paramsId: params.id,
+    formState,
   };
 }

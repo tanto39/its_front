@@ -6,7 +6,7 @@ export const unitInputFields: IInputField[] = [
     type: "number",
     label: "УИД сборочной единицы",
     placeholder: "",
-    disabled: true
+    disabled: true,
   },
   {
     id: "name",
@@ -14,6 +14,13 @@ export const unitInputFields: IInputField[] = [
     label: "Название",
     placeholder: "Название",
     required: true,
+    validation: {
+      required: "Название обязательно",
+      maxLength: {
+        value: 32,
+        message: "Название не должно превышать 32 символа",
+      },
+    },
   },
   {
     id: "date_repair",
@@ -28,6 +35,6 @@ export const unitInputFields: IInputField[] = [
     label: "Информация",
     placeholder: "",
     is_textarea: true,
-    customClassName: 'inputUI__textarea'
+    customClassName: "inputUI__textarea",
   },
 ];

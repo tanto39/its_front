@@ -1,3 +1,5 @@
+import { RegisterOptions } from 'react-hook-form';
+
 // Типы для форм
 export interface IInputField {
   id: string;
@@ -10,6 +12,7 @@ export interface IInputField {
   is_textarea?: boolean;
   max?: number;
   min?: number;
+  validation?: RegisterOptions;
 }
 
 export interface SelectOption {

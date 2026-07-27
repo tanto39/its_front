@@ -13,6 +13,7 @@ interface SelectUIProps {
   noOptionsMessage?: string;
   searchPlaceholder?: string;
   label?: string;
+  required?: boolean;
 }
 
 const SelectUI: React.FC<SelectUIProps> = ({
@@ -25,6 +26,7 @@ const SelectUI: React.FC<SelectUIProps> = ({
   noOptionsMessage = "Совпадений не найдено",
   searchPlaceholder = "Поиск...",
   label,
+  required,
 }) => {
   const {
     isOpen,
@@ -42,9 +44,11 @@ const SelectUI: React.FC<SelectUIProps> = ({
     normalizedOptions,
   } = useSelect({ options, value, onChange, disabled, className });
 
+  const isError = required && (value === undefined || value === null || value === '');
+
   // Комбинируем внешние и внутренние классы
   const containerClass = `${styles.container} ${disabled ? styles.disabled : ""} ${className}`;
-  const selectHeaderClass = `${styles.selectHeader} ${isOpen ? styles.open : ""}`;
+  const selectHeaderClass = `${styles.selectHeader} ${isOpen ? styles.open : ""} ${isError ? styles.error : ""}`;
 
   return (
     <div className={styles.selectWrap}>
@@ -105,6 +109,8 @@ const SelectUI: React.FC<SelectUIProps> = ({
             )}
           </div>
         )}
+
+        {isError && <div className={styles.errorMessage}>Поле обязательно</div>}
       </div>
     </div>
   );

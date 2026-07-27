@@ -46,6 +46,7 @@ const Unit: React.FC = () => {
                     disabled: user.role_name !== "admin" && car?.person?.login !== user.login ? true : field.disabled,
                   }}
                   register={formMethods.register}
+                  errors={formMethods.formState.errors}
                 />
               ))}
 
@@ -60,7 +61,7 @@ const Unit: React.FC = () => {
               />
 
               <FormProvider {...formMethods}>
-                <Its register={formMethods.register} />
+                <Its register={formMethods.register} errors={formMethods.formState.errors} />
               </FormProvider>
 
               {(user.role_name == "admin" || car?.person?.login == user.login) && (

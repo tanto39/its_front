@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Its.module.css";
-import { UseFormRegister } from "react-hook-form";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { IInputField } from "../../../types/forms";
 import InputUI from "../InputUI/InputUI";
 import { useIts } from "../../../hooks/useIts";
@@ -10,6 +10,7 @@ interface IItsProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   customClassName?: string;
   showIts?: boolean;
+  errors?: FieldErrors;
   register?: UseFormRegister<any>;
 }
 
@@ -18,9 +19,10 @@ export const Its: React.FC<IItsProps> = ({
   label = "Индекс технического состояния (ИТС)",
   customClassName,
   register,
+  errors,
   showIts = true,
 }) => {
-  const{ itsColorClass, itsDescr} = useIts({its_val});
+  const { itsColorClass, itsDescr } = useIts({ its_val });
 
   const field: IInputField = {
     id: "its",
@@ -28,6 +30,16 @@ export const Its: React.FC<IItsProps> = ({
     customClassName: "short",
     max: 100,
     min: 0,
+    validation: {
+      max: {
+        value: 100,
+        message: "Максимальный ИТС 100",
+      },
+      min: {
+        value: 0,
+        message: "Минимальный ИТС 0",
+      },
+    },
   };
 
   return (
@@ -37,7 +49,7 @@ export const Its: React.FC<IItsProps> = ({
         {showIts && (
           <div className={styles["its__value"]}>
             {register ? (
-              <InputUI key={field.id} field={field} register={register} />
+              <InputUI key={field.id} field={field} register={register} errors={errors} />
             ) : (
               <div className={styles["its__valTxt"]}>{its_val}</div>
             )}

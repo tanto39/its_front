@@ -1,6 +1,7 @@
 .inputUI {
   display: flex;
   flex-direction: column;
+  margin: 0 0 16px 0;
 }
 .inputUI__field, .inputUI__textarea {
   border-radius: 6px;
@@ -8,7 +9,6 @@
   border-radius: 15px;
   white-space: nowrap;
   padding: 15px 32px;
-  margin: 0 0 16px 0;
   font: 300 22px / 26px Roboto, Montserrat, Helvetica, sans-serif;
 }
 .inputUI__textarea {
@@ -23,6 +23,14 @@
 }
 .short {
   width: 80px;
+}
+.inputUI__error {
+  color: #e53e3e;
+  font-size: 0.8rem;
+}
+.inputUI__field_error {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 1px #e53e3e;
 }
 @media (max-width: 991px) {
   .inputUI__field {

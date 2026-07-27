@@ -25,6 +25,7 @@ const Car: React.FC = () => {
     handleSubmit,
     selectedPerson,
     setSelectedPerson,
+    formState,
   } = useCar();
 
   return (
@@ -46,6 +47,7 @@ const Car: React.FC = () => {
                     disabled: user.role_name !== "admin" && car.person?.login !== user.login ? true : field.disabled,
                   }}
                   register={register}
+                  errors={formState.errors}
                 />
               ))}
 

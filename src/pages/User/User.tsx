@@ -22,6 +22,7 @@ const User: React.FC = () => {
     setSelectedRole,
     optionsRole,
     paramsId,
+    formState,
   } = useUser();
 
   return (
@@ -45,8 +46,20 @@ const User: React.FC = () => {
                       (currentUser.role_name !== "admin" && user.login !== currentUser.login)
                         ? true
                         : field.disabled,
+                    required: field.id === "password" && paramsId === "0" ? true : field.required,
+                    validation:
+                      field.id === "password" && paramsId !== "0"
+                        ? {
+                            pattern: {
+                              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/,
+                              message:
+                                "Пароль должен содержать минимум 8 символов, заглавную, строчную букву, спецсимвол",
+                            },
+                          }
+                        : field.validation,
                   }}
                   register={register}
+                  errors={formState.errors}
                 />
               ))}
 
@@ -58,6 +71,7 @@ const User: React.FC = () => {
                 searchPlaceholder="Поиск по роли"
                 label="Роль"
                 disabled={currentUser.role_name !== "admin" && user.login !== currentUser.login ? true : false}
+                required
               />
 
               {(currentUser.role_name === "admin" || user.login === currentUser.login) && (

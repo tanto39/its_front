@@ -26,12 +26,15 @@ export function useLogin() {
     }
   }, [user, navigate, error, dispatch]);
 
-  const { register, handleSubmit, getValues } = useForm<LoginFormData>();
+  const { register, handleSubmit, getValues, formState } = useForm<LoginFormData>({
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
 
   const onSubmitAuth = async () => {
     const data = getValues();
     dispatch(sendAuth(data));
   };
 
-  return { register, handleSubmit, onSubmitAuth, isLoading, error };
+  return { register, handleSubmit, onSubmitAuth, isLoading, error, formState };
 }

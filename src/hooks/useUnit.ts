@@ -22,8 +22,11 @@ export function useUnit() {
 
   const params = useParams<IUrlParam>();
 
-  const formMethods = useForm<unitFormData>();
-  const { setValue, watch } = formMethods;
+  const formMethods = useForm<unitFormData>({
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
+  const { setValue, watch, formState } = formMethods;
 
   // Получаем значение car_id из формы
   const watchCar = watch("car_id");
@@ -141,5 +144,6 @@ export function useUnit() {
     formMethods,
     selectedCar,
     setSelectedCar,
+    formState,
   };
 }

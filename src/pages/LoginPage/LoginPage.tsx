@@ -8,11 +8,27 @@ import ErrorBlock from "../../components/UI/ErrorBlock/ErrorBlock";
 import { useLogin } from "../../hooks/useLogin.ts";
 
 const LoginPage: React.FC = () => {
-  const { register, handleSubmit, onSubmitAuth, isLoading, error } = useLogin();
+  const { register, handleSubmit, onSubmitAuth, isLoading, error, formState } = useLogin();
 
   const inputFields: IInputField[] = [
-    { id: "login", type: "text", label: "Логин", placeholder: "login_01" },
-    { id: "password", type: "password", label: "Пароль", placeholder: "************" },
+    {
+      id: "login",
+      type: "text",
+      label: "Логин",
+      placeholder: "login_01",
+      validation: {
+        required: "Логин обязателен",
+      },
+    },
+    {
+      id: "password",
+      type: "password",
+      label: "Пароль",
+      placeholder: "************",
+      validation: {
+        required: "Пароль обязателен",
+      },
+    },
   ];
 
   return (
@@ -20,7 +36,7 @@ const LoginPage: React.FC = () => {
       <form className={styles.loginForm}>
         <div className={styles.formInputs}>
           {inputFields.map((field) => (
-            <InputUI key={field.id} field={field} register={register} />
+            <InputUI key={field.id} field={field} register={register} errors={formState.errors} />
           ))}
         </div>
 

@@ -20,7 +20,10 @@ export function useCar() {
 
   const params = useParams<IUrlParam>();
 
-  const { register, handleSubmit, setValue, watch } = useForm<carFormData>();
+  const { register, handleSubmit, setValue, watch, formState } = useForm<carFormData>({
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
 
   // Получаем значение id_medical_profile из формы
   const watchPerson = watch("person");
@@ -140,6 +143,7 @@ export function useCar() {
     register,
     handleSubmit,
     selectedPerson,
-    setSelectedPerson
+    setSelectedPerson,
+    formState,
   };
 }
