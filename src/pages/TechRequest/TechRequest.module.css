@@ -3,3 +3,17 @@
   display: flex;
   gap: 20px;
 }
+.currentCar {
+  margin: 40px 0;
+  padding: 20px 20px 0 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  background: var(--bg-color);
+}
+
+@media (max-width: 991px) {
+  .currentCar {
+    margin: 20px 0;
+    padding: 20px 3px;
+  }
+}

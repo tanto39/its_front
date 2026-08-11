@@ -60,6 +60,9 @@
   .car, .car__nums {
     flex-direction: column;
   }
+  .car {
+    padding: 16px;
+  }
   .car__img {width: 100%;}
   .car__its {
     margin: 20px auto;

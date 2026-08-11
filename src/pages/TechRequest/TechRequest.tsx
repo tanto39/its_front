@@ -7,6 +7,8 @@ import Loader from "../../components/UI/Loader/Loader";
 import { inputFields } from "./inputFields";
 import SelectUI from "../../components/UI/SelectUI/SelectUI";
 import { useTechRequest } from "../../hooks/useTechRequest";
+import { optionsStatus, optionsType } from "./options";
+import CarsItem from "../../components/CarsItem/CarsItem";
 
 const TechRequest: React.FC = () => {
   const {
@@ -26,7 +28,9 @@ const TechRequest: React.FC = () => {
     setSelectedPerson,
     selectedType,
     setSelectedType,
-    optionsType
+    selectedStatus,
+    setSelectedStatus,
+    currentCar,
   } = useTechRequest();
 
   return (
@@ -83,6 +87,16 @@ const TechRequest: React.FC = () => {
                 disabled={user.role_name !== "admin" && techRequest.person?.login !== user.login ? true : false}
               />
 
+              <SelectUI
+                options={optionsStatus}
+                value={selectedStatus}
+                onChange={setSelectedStatus}
+                placeholder="Статус"
+                searchPlaceholder="Поиск"
+                label="Статус"
+                disabled={user.role_name !== "admin" && techRequest.person?.login !== user.login ? true : false}
+              />
+
               {(user.role_name === "admin" || techRequest.person?.login === user.login) && (
                 <div className={styles.buttonsBottom}>
                   <div className={styles.saveButton}>
@@ -98,6 +112,12 @@ const TechRequest: React.FC = () => {
                 </div>
               )}
             </form>
+
+            {currentCar && (
+              <div className={styles.currentCar}>
+                <CarsItem key={currentCar.car_id} car={currentCar} />
+              </div>
+            )}
           </div>
         </div>
       )}

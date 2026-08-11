@@ -10,6 +10,7 @@ export const useImage = ({ imageUrl, onFileSelect }: UseImageProps) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(BASE_URL + imageUrl || null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setPreviewUrl(BASE_URL + imageUrl);
@@ -38,10 +39,16 @@ export const useImage = ({ imageUrl, onFileSelect }: UseImageProps) => {
     }
   };
 
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return {
     previewUrl,
     selectedFile,
     fileInputRef,
     handleFileChange,
+    isModalOpen,
+    openModal,
+    closeModal,
   };
 };

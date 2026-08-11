@@ -42,12 +42,14 @@ export interface ICar {
 }
 
 export type RequestType = "to" | "repair";
+export type RequestStatus = "new" | "process" | "done";
 
 export interface ITechRequest {
   request_id: number,
   request_type: RequestType,
   car_id: number,
   date_repair: string,
+  status: RequestStatus,
   info: string,
   person?: IUser;
   car?: ICar;

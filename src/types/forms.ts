@@ -44,6 +44,7 @@ export interface techRequestForm {
   date_repair: string,
   info: string,
   person: string;
+  status: string;
 }
 
 export interface userForm {

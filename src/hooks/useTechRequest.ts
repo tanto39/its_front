@@ -11,23 +11,18 @@ import {
   setCurrentTechRequest,
   createTechRequest,
 } from "../store/slices/techRequestSlice";
-import { ITechRequest, IMessage, IUrlParam, RequestType } from "../types/index";
+import { ITechRequest, IMessage, IUrlParam, RequestType, RequestStatus, ICar } from "../types/index";
 import { useCars } from "./useCars";
 import { useUsers } from "./useUsers";
-import { SelectOption, techRequestForm } from "../types/forms";
+import { techRequestForm } from "../types/forms";
 import { clearStats } from "../store/slices/statsSlice";
 
 export function useTechRequest() {
   const navigate = useNavigate();
   const messageSet: IMessage = {} as IMessage;
 
-  const optionsType: SelectOption[] = [
-    { label: "ТО", value: "to" },
-    { label: "Ремонт", value: "repair" },
-  ];
-
   const { techRequest, isLoading, error, successSend } = useAppSelector((state) => state.techRequest);
-  const { optionsCars } = useCars();
+  const { optionsCars, cars } = useCars();
   const { optionsUsers } = useUsers();
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
@@ -40,6 +35,7 @@ export function useTechRequest() {
   const watchCar = watch("car_id");
   const watchPerson = watch("person");
   const watchType = watch("request_type");
+  const watchStatus = watch("status");
 
   // Инициализируем selectedCar из формы или из currentTechRequest
   const [selectedCar, setSelectedCar] = useState<string | number>(watchCar || techRequest?.car_id || "");
@@ -47,8 +43,10 @@ export function useTechRequest() {
     watchPerson || techRequest?.person?.login || "",
   );
   const [selectedType, setSelectedType] = useState<string | number>(watchType || techRequest?.request_type || "to");
+  const [selectedStatus, setSelectedStatus] = useState<string | number>(watchStatus || techRequest?.status || "new");
 
   const [isDeleting, setIsDeleting] = useState(false);
+  const [currentCar, setCurrentCar] = useState<ICar | null>(null);
 
   useEffect(() => {
     if (isDeleting) return;
@@ -73,13 +71,26 @@ export function useTechRequest() {
       if (techRequest.car_id) {
         setValue("car_id", techRequest.car_id);
         setSelectedCar(techRequest.car_id);
+
+        if (cars && cars.length > 0) {
+          const foundCar = cars.find((c: ICar) => c.car_id === techRequest.car_id);
+          if (foundCar) {
+            setCurrentCar(foundCar);
+          } else {
+            setCurrentCar(null);
+          }
+        }
       }
       if (techRequest.request_type) {
         setValue("request_type", techRequest.request_type);
         setSelectedType(techRequest.request_type);
       }
+      if (techRequest.status) {
+        setValue("status", techRequest.status);
+        setSelectedStatus(techRequest.status);
+      }
     }
-  }, [dispatch, techRequest, setValue, params.id, isDeleting]);
+  }, [dispatch, techRequest, setValue, params.id, isDeleting, cars]);
 
   if (error) {
     messageSet.type = "E";
@@ -104,7 +115,8 @@ export function useTechRequest() {
       car_id: selectedCar as number,
       person: String(selectedPerson),
       date_repair: formData.date_repair || "",
-      info: formData.info || ""
+      info: formData.info || "",
+      status: selectedStatus as RequestStatus,
     };
 
     await dispatch(clearStats());
@@ -160,6 +172,8 @@ export function useTechRequest() {
     setSelectedPerson,
     selectedType,
     setSelectedType,
-    optionsType
+    selectedStatus,
+    setSelectedStatus,
+    currentCar
   };
 }
