@@ -51,7 +51,7 @@ const Stat: React.FC = () => {
               </div>
             </div>
             <div className={styles.statItem}>
-              <span className={styles.label}>Количество заявок на ТО и ремонт</span>
+              <span className={styles.label}>Количество активных заявок на ТО и ремонт</span>
               <div className={styles.valueWrap}>
                 <span className={styles.value}>{stats.totalRequests}</span>
               </div>
