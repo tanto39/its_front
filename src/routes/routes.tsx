@@ -1,5 +1,4 @@
 import { Navigate, RouteObject } from 'react-router-dom';
-import Dashboard from '../pages/Dashboard/Dashboard';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import Cars from '../pages/Cars/Cars';
 import Car from '../pages/Car/Car';
@@ -18,8 +17,7 @@ export const publicRoutes: RouteObject[] = [
 ];
 
 export const privateRoutes: RouteObject[] = [
-  { path: "/", element: <Dashboard/> },
-  { path: '/cars', element: <Cars /> },
+  { path: "/", element: <Cars /> },
   { path: '/cars/:id', element: <Car /> },
   { path: '/unit/:id', element: <Unit /> },
   { path: '/tech_requests', element: <TechRequests /> },

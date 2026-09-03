@@ -120,7 +120,7 @@ export function useCar() {
           try {
             await dispatch(clearStats());
             await dispatch(deleteCar({ id: car.car_id })).unwrap();
-            navigate("/cars");
+            navigate("/");
           } catch (err) {
             console.error("Ошибка удаления:", err);
             setIsDeleting(false); // при ошибке снимаем блокировку
