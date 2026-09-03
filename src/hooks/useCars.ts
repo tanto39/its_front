@@ -8,7 +8,7 @@ import { useFilter } from "./useFilter";
 export function useCars() {
     const messageSet: IMessage = {} as IMessage;
   
-    const { cars, optionsCars, isLoading, isGetCars, error } = useAppSelector((state) => state.cars);
+    const { cars, optionsCars, isLoading, isGetCars, error, car } = useAppSelector((state) => state.cars);
     const dispatch = useAppDispatch();
   
     useEffect(() => {
@@ -26,5 +26,5 @@ export function useCars() {
     
   const filteredSortedCars = useFilter(cars);
 
-  return { cars, filteredSortedCars, optionsCars, isLoading, error };
+  return { cars, filteredSortedCars, optionsCars, isLoading, error, car };
 }

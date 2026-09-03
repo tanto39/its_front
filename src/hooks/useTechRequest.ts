@@ -22,7 +22,7 @@ export function useTechRequest() {
   const messageSet: IMessage = {} as IMessage;
 
   const { techRequest, isLoading, error, successSend } = useAppSelector((state) => state.techRequest);
-  const { optionsCars, cars } = useCars();
+  const { optionsCars, cars, car } = useCars();
   const { optionsUsers } = useUsers();
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
@@ -38,7 +38,7 @@ export function useTechRequest() {
   const watchStatus = watch("status");
 
   // Инициализируем selectedCar из формы или из currentTechRequest
-  const [selectedCar, setSelectedCar] = useState<string | number>(watchCar || techRequest?.car_id || "");
+  const [selectedCar, setSelectedCar] = useState<string | number>(watchCar || techRequest?.car_id || car?.car_id || "");
   const [selectedPerson, setSelectedPerson] = useState<string | number>(
     watchPerson || techRequest?.person?.login || "",
   );
@@ -174,6 +174,6 @@ export function useTechRequest() {
     setSelectedType,
     selectedStatus,
     setSelectedStatus,
-    currentCar
+    currentCar,
   };
 }

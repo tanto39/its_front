@@ -131,6 +131,10 @@ export function useCar() {
     }
   };
 
+  const toTechRequest = () => {
+    navigate("/tech_requests/0");
+  };
+
   return {
     car,
     optionsUsers,
@@ -145,5 +149,6 @@ export function useCar() {
     selectedPerson,
     setSelectedPerson,
     formState,
+    toTechRequest
   };
 }

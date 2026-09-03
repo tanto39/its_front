@@ -26,6 +26,7 @@ const Car: React.FC = () => {
     selectedPerson,
     setSelectedPerson,
     formState,
+    toTechRequest
   } = useCar();
 
   return (
@@ -76,7 +77,7 @@ const Car: React.FC = () => {
                     </ButtonUI>
                   </div>
                   <div className={styles.techRequestButton}>
-                    <ButtonUI type="button" onClick={handleSubmit(onSubmit)}>
+                    <ButtonUI type="button" onClick={toTechRequest}>
                       Запись на ТО и ремонт
                     </ButtonUI>
                   </div>
