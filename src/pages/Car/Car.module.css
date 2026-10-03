@@ -11,7 +11,7 @@
   width: 200px;
 }
 .techRequestButton {
-  width: 300px;
+  width: 400px;
 }
 .rightSide {
   flex-grow: 0.2;
@@ -23,6 +23,13 @@
   gap: 20px;
 }
 
+@media (max-width: 1150px) {
+  .buttonsBottom {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
 @media (max-width: 991px) {
   .formWrap {
     flex-direction: column;
@@ -31,8 +38,7 @@
     width: 100%;
     order: 2;
   }
-  .buttonsBottom {
-    flex-direction: column;
-    gap: 5px;
+  .techRequestButton {
+    width: auto;
   }
 }

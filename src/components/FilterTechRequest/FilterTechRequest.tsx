@@ -78,7 +78,7 @@ const FilterTechRequest: React.FC = () => {
   const dateRepairField: IInputField = {
     id: "filter_date_repair",
     type: "date",
-    label: "Дата ремонта",
+    label: "Дата ТО/ремонта",
     placeholder: "",
   };
 

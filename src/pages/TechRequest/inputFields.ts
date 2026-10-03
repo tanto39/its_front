@@ -11,7 +11,7 @@ export const inputFields: IInputField[] = [
   {
     id: "date_repair",
     type: "date",
-    label: "Дата ремонта",
+    label: "Дата ТО/ремонта",
     placeholder: "",
     customClassName: "inputUI__date",
   },
